@@ -19,10 +19,11 @@ def login():
         reader = csv.DictReader(file)
         for row in reader:
             if row['email'] == email and row['password'] == password:
-                return f"¡Bienvenido, {email}!"
+                return render_template('menuAdmin.html')
     
     # Si llega aquí, credenciales inválidas
     return render_template('login.html', error="Credenciales incorrectas")
 
 if __name__ == '__main__':
     app.run(debug=True)
+
