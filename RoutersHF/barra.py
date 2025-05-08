@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,redirect,url_for
 
 app = Flask(__name__, template_folder='../templates')
 
@@ -34,7 +34,7 @@ def crear_empleado():
 
 @app.route('/listado_empleado')
 def listado_empleado():
-    return  render_template('listado_empleados.html')
+    return  render_template('listado_empleado.html')
 
 @app.route('/crear_puesto')
 def crear_puesto():
@@ -61,9 +61,10 @@ def crear_jornada():
 def listado_jornada():
     return render_template('listado_jornada.html')
 
+@app.route('/cerra_seccion')
+def cerrar_seccion():
+    return render_template('login.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-

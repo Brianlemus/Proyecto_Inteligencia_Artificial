@@ -1,9 +1,13 @@
-import csv
 from flask import Flask, render_template, request, redirect, url_for
 import os
+import csv
 
-app = Flask(__name__)
-DICCIONARIO_CSV = 'data/diccionario.csv'
+app = Flask(__name__, template_folder='../templates')
+DICCIONARIO_CSV = '../diccionario.csv'
+
+@app.route('/')
+def index():
+    return render_template('solucion.html')
 
 @app.route('/instrucciones/<categoria>/<problema>', methods=['GET', 'POST'])
 def instrucciones(categoria, problema):
