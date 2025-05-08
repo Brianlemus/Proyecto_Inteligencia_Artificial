@@ -1,27 +1,35 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import csv
 import os
 
 app = Flask(__name__, template_folder='../templates')
 CSV_FILE = 'jornada.csv'
 
-@app.route('/ingreso_jornada', methods=['POST'])  # Corregido 'method' a 'methods'
+@app.route('/ingreso_jornada', methods=['POST'])
 def ingreso_jornada():
-    dias = request.form['dias']  # Asegúrate de usar el nombre correcto
-    hora_inicio = request.form['hora_inicio']  # Asegúrate de usar el nombre correcto
-    hora_fin = request.form['hora_fin']  # Asegúrate de usar el nombre correcto
+    dias = request.form['dias']
+    hora_inicio = request.form['hora_inicio']
+    hora_fin = request.form['hora_fin']
 
     # Escribir en el archivo CSV
     with open(CSV_FILE, mode='a', newline='') as file:
         writer = csv.writer(file)
         writer.writerow([dias, hora_inicio, hora_fin])
     
-    return render_template('listado_jornada.html')
+    return redirect(url_for('listado_jornada'))  # Redirige al listado
 
 @app.route('/listado_jornada')
 def listado_jornada():
-    return render_template('listado_jornada.html')
+    # Leer los datos del CSV
+    jornadas = []
+    try:
+        with open(CSV_FILE, mode='r') as file:
+            reader = csv.reader(file)
+            jornadas = list(reader)  # Convertir a lista
+    except FileNotFoundError:
+        pass  # Maneja el caso en que el archivo no existe
 
+    return render_template('listado_jornada.html', jornadas=jornadas)
 
 @app.route('/')
 def index():
