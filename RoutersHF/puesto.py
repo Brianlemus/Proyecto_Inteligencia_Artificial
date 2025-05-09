@@ -25,7 +25,20 @@ def crear_puesto():
         writer = csv.writer(csvfile)
         writer.writerow([area_id, puesto_nombre])  # Guardar el área y el nombre del puesto
 
-    return redirect(url_for('index'))
+    return redirect(url_for('lista_puesto'))
+
+@app.route('/lista_puesto')
+def lista_puesto():
+    # Leer los datos del CSV
+    puestos = []
+    try:
+        with open('puesto.csv', mode='r') as file:
+            reader = csv.reader(file)
+            puestos = list(reader)  # Convertir a lista
+    except FileNotFoundError:
+        pass  # Maneja el caso en que el archivo no existe
+
+    return render_template('lista_puesto.html', puestos=puestos)
 
 if __name__ == '__main__':
     app.run(debug=True)
