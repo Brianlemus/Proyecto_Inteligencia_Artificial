@@ -11,7 +11,7 @@ def index():
     with open('area.csv', newline='') as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
-            areas.append(row)  # Asumiendo que cada fila contiene un área
+            areas.append(row)  
 
     return render_template('crear_puesto.html', areas=areas)
 
