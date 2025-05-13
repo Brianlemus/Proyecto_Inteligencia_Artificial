@@ -1,3 +1,7 @@
-email,password
-ble@gmail.com,PRUEBA
-otro@correo.com,123456
+email,password,nombre,rol,puesto
+ble@gmail.com,PRUEBA,Brian Lemus,Residente,Propietario
+otro@correo.com,123456,Thelma Galicia,Residente,Inquilino
+pp@gmail.com,p43,Hugo,Residente,Propietario
+prt@gmail.com,25,Hugo,Residente,Propietario
+prue@gmail.com,P34,Thelma,Admin,Inquilino
+pprer@gmail.com,prere,Hugo prueba,Residente,Propietario
