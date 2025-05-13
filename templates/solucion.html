@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Validación Ticket</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Verificación de Instrucciones</h2>
+  
+    <form id="ticketForm" class="mx-auto" style="max-width: 700px;">
+
+      <!-- Primera pregunta -->
+      <div class="mb-4">
+        <p>¿Ha leído las indicaciones anteriores?</p>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" id="leido-si" name="leido" value="si" required>
+          <label class="form-check-label" for="leido-si">Sí</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" id="leido-no" name="leido" value="no" required>
+          <label class="form-check-label" for="leido-no">No</label>
+        </div>
+      </div>
+
+      <!-- Segunda pregunta -->
+      <div id="segundaPregunta" class="mb-4 d-none">
+        <p>¿Ha resuelto su problema conforme a las indicaciones anteriores?</p>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" id="resuelto-si" name="resuelto" value="si" required>
+          <label class="form-check-label" for="resuelto-si">Sí</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" id="resuelto-parcial" name="resuelto" value="no_completamente" required>
+          <label class="form-check-label" for="resuelto-parcial">No completamente</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" id="resuelto-no" name="resuelto" value="no" required>
+          <label class="form-check-label" for="resuelto-no">No</label>
+        </div>
+      </div>
+
+      <!-- Botón -->
+      <div class="d-grid">
+        <button type="submit" class="btn btn-success">Generar Ticket</button>
+      </div>
+
+      <!-- Mensaje -->
+      <div id="mensaje" class="mt-4 text-center fw-bold"></div>
+
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    
+    const leidoRadios = document.getElementsByName("leido");
+    const resueltoRadios = document.getElementsByName("resuelto");
+    const segundaPregunta = document.getElementById("segundaPregunta");
+    const form = document.getElementById("ticketForm");
+    const mensaje = document.getElementById("mensaje");
+
+    leidoRadios.forEach(radio => {
+      radio.addEventListener("change", () => {
+        if (radio.value === "si") {
+          segundaPregunta.classList.remove("d-none");
+          mensaje.textContent = "";
+        } else {
+          segundaPregunta.classList.add("d-none");
+          mensaje.textContent = "Por favor lea las indicaciones antes de continuar.";
+        }
+      });
+    });
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const leido = document.querySelector('input[name="leido"]:checked');
+      const resuelto = document.querySelector('input[name="resuelto"]:checked');
+
+      if (!leido) {
+        mensaje.textContent = "Seleccione una opción en la primera pregunta.";
+        return;
+      }
+
+      if (leido.value === "no") {
+        mensaje.textContent = "Por favor lea las indicaciones antes de generar un ticket.";
+        return;
+      }
+
+      if (!resuelto) {
+        mensaje.textContent = "Seleccione una opción en la segunda pregunta.";
+        return;
+      }
+
+      if (resuelto.value === "si") {
+        mensaje.textContent = "¡Perfecto! No es necesario generar un ticket.";
+      } else {
+        mensaje.textContent = "Ticket generado correctamente.";
+        window.location.href = "/seguimiento_ticket";
+      }
+    });
+  </script>
+</body>
+</html>
