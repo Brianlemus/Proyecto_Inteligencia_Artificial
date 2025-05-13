@@ -1,12 +1,18 @@
-import csv
 from flask import Flask, render_template, request, redirect, url_for
 import os
+import csv
 
-app = Flask(__name__)
-DICCIONARIO_CSV = 'data/diccionario.csv'
+app = Flask(__name__, template_folder='../templates')
+DICCIONARIO_CSV = 'diccionario.csv'
 
-@app.route('/instrucciones/<categoria>/<problema>', methods=['GET', 'POST'])
-def instrucciones(categoria, problema):
+@app.route('/')
+def index():
+    return render_template('solucion.html')
+
+@app.route('/instrucciones', methods=['GET', 'POST'])
+def instrucciones():
+    categoria = request.args.get('categoria')
+    problema = request.args.get('problema')
     pasos = []
 
     # Leer pasos desde diccionario.csv
@@ -25,7 +31,7 @@ def instrucciones(categoria, problema):
         resuelto = request.form.get('resuelto')
 
         if leido == 'no':
-            mensaje = "Por favor lea las instrucciones antes de continuar."
+            mensaje = "Por favor, lea las instrucciones antes de continuar."
         elif leido == 'si':
             if resuelto == 'si':
                 mensaje = "¡Perfecto! No es necesario generar un ticket."
@@ -39,3 +45,6 @@ def instrucciones(categoria, problema):
                            pasos=pasos,
                            mensaje=mensaje,
                            mostrar_ticket=mostrar_ticket)
+
+if __name__ == '__main__':
+    app.run(debug=True)

@@ -4,10 +4,31 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="#">
         <title>Inicio</title>
-        <link rel="stylesheet" href="Css/barra.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+        
+        <!-- ruta con css
+            <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='Css/barra.css')}}" />
+        -->
+
+        <!--Utilizado de esta forma debido a que el formula css no despliega bien el menu al ejecutar el .py-->
+
+        <style>
+        .dropdown-submenu {
+            position: relative;
+        }
+        .dropdown-submenu>.dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -6px;
+            margin-left: 
+            display: none;
+        }
+        .dropdown-submenu:hover>.dropdown-menu {
+            display: block;
+        }
+        </style>
+
     </head>
 
     <body>
@@ -15,7 +36,7 @@
             <ul class="navbar-nav me-auto">
 
                 <li class="nav-item dropdown list-group-item">
-                    <a class="nav-link" href="menuAdmin.html" role="button" aria-expanded="false">
+                    <a class="nav-link" href="/home" role="button" aria-expanded="false">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
                             <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
                         </svg>
@@ -33,7 +54,7 @@
 
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="/crear_tickets">
                                 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ticket-perforated" viewBox="0 0 16 16">
                                     <path d="M4 4.85v.9h1v-.9zm7 0v.9h1v-.9zm-7 1.8v.9h1v-.9zm7 0v.9h1v-.9zm-7 1.8v.9h1v-.9zm7 0v.9h1v-.9zm-7 1.8v.9h1v-.9zm7 0v.9h1v-.9z"/>
@@ -46,7 +67,7 @@
 
 
                         <li>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="/historial_tickets">
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ticket-detailed" viewBox="0 0 16 16">
                                     <path d="M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5M5 7a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2z"/>
@@ -80,7 +101,7 @@
                         </a></li>
 
 
-                        <li><a class="dropdown-item" href="grafica_pie.html">
+                        <li><a class="dropdown-item" href="/grafica_pie">
                             
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pie-chart-fill" viewBox="0 0 16 16">
                                 <path d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778zM8.5.015V7.5h7.485A8 8 0 0 0 8.5.015"/>
@@ -89,7 +110,7 @@
                             Grafica de pie
                         </a></li>
 
-                        <li><a class="dropdown-item" href="grafica_barras.html">
+                        <li><a class="dropdown-item" href="/grafica_barra">
                             
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-bar-graph-fill" viewBox="0 0 16 16">
                                 <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2m-2 11.5v-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5m-2.5.5a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5zm-3 0a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5z"/>
@@ -147,8 +168,8 @@
                             </a>
                             
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="crear_usuario.html">Crear</a>
-                                <a class="dropdown-item" href="listado_empleado.html">Listado</a>
+                                <a class="dropdown-item" href="/crear_empleado">Crear</a>
+                                <a class="dropdown-item" href="/listado_empleado">Listado</a>
                             </div>
                         </div>
 
@@ -164,8 +185,8 @@
                             </a>
 
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="crear_puesto.html">Crear</a>
-                                <a class="dropdown-item" href="lista_puesto.html">Listado</a>
+                                <a class="dropdown-item" href="/crear_puesto">Crear</a>
+                                <a class="dropdown-item" href="/listado_puesto">Listado</a>
                             </div>
                         </div>
 
@@ -181,8 +202,8 @@
                             </a>
 
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="crear_area.html">Crear</a>
-                                <a class="dropdown-item" href="lista_area.html">Listado</a>
+                                <a class="dropdown-item" href="/crear_area">Crear</a>
+                                <a class="dropdown-item" href="/listado_area">Listado</a>
                             </div>
                         </div>
 
@@ -197,8 +218,8 @@
                             </a>
 
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="crear_jornada.html">Crear</a>
-                                <a class="dropdown-item" href="listado_jornada.html">Listado</a>
+                                <a class="dropdown-item" href="/crear_jornada">Crear</a>
+                                <a class="dropdown-item" href="/listado_jornada">Listado</a>
                             </div>
                         </div>
 
@@ -267,7 +288,7 @@
                         
                         
                         <li>
-                            <a class="dropdown-item" href="login.html">
+                            <a class="dropdown-item" href="/cerra_seccion">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
                                     <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
