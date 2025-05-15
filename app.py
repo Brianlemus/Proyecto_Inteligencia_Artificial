@@ -20,8 +20,8 @@ def login():
                 if row['email'] == email and row['password'] == password:
                     return render_template('menuAdmin.html')
 
-
-return render_template('login.html', error="Credenciales incorrectas")
+    # Esta línea debe estar dentro de la función
+    return render_template('login.html', error="Credenciales incorrectas")
 
 @app.route('/registro', methods=['GET', 'POST'])
 def registro():
@@ -94,4 +94,4 @@ def registro():
     return render_template('registro.html', roles=roles, puestos=puestos, casas=casas)
 
 if __name__ == '__main__':
-   app.run(debug=True)
+    app.run(debug=True)
