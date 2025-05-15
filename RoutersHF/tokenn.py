@@ -10,12 +10,12 @@ def cargar_diccionario():
     with open('diccionario.csv', mode='r', encoding='utf-8') as archivo:
         lector = csv.DictReader(archivo)
         for fila in lector:
+            area = fila['Area']
             problema = fila['Problema']
             solucion = fila['Solucion']
-            if problema in diccionario:
-                diccionario[problema].append(solucion)
-            else:
-                diccionario[problema] = [solucion]
+            if problema not in diccionario:
+                diccionario[problema] = {'soluciones': [], 'area': area}
+            diccionario[problema]['soluciones'].append(solucion)
     return diccionario
 
 diccionario = cargar_diccionario()
@@ -24,15 +24,23 @@ diccionario = cargar_diccionario()
 def home():
     if request.method == 'POST':
         descripcion = request.form['descripcion']
-        soluciones = diccionario.get(descripcion, ["No se encontró solución para el problema."])
+        # Obtener el problema y sus datos
+        data = diccionario.get(descripcion, None)
         
-        resultado = f"<h5>Descripcion</h5> <li>{descripcion}</li> <h5>Solucion</h5> <ul>"
+        if data:
+            area = data['area']
+            soluciones = data['soluciones']
+        else:
+            area = "Area desconocida"
+            soluciones = ["No se encontró solución para el problema."]
+        
+        resultado = f"<h5>Área</h5><li>{area}</li><h5>Descripción</h5><li>{descripcion}</li><h5>Solución</h5><ul>"
         for solucion in soluciones:
             resultado += f"<li>{solucion}</li>"
         resultado += "</ul>"
         
         return redirect(url_for('mostrar_respuesta', resultado=resultado))
-    
+
     return render_template('crearticket.html')
 
 @app.route('/mostrar_respuesta')
