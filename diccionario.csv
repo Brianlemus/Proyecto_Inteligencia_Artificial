@@ -1,239 +1,239 @@
-Area,Problema,Solucion
-Agua,Tubo roto,"Cerrar la válvula principal de paso."
-Agua,Tubo roto,"Colocar un tapón en el tubo."
-Agua,Tubo roto,"Usa cinta de teflón."
-Agua,Manguera cortada,"Cerrar paso de agua al área afectada (if possible)."
-Agua,Manguera cortada,"Colocar un tapón en la manguera."
-Agua,Manguera cortada,"Cerrar el chorro de agua."
-Agua,Manguera cortada,"Cut the damaged part."
-Agua,Fuga,"Seca bien y coloca cinta de teflón."
-Agua,Fuga,"Pon un trapo bien amarrado."
-Agua,Fuga de agua,"Coloca una cubeta debajo."
-Agua,Fuga de agua,"Cierra la llave más cercana."
-Agua,Gotera,"Coloca un recipiente debajo."
-Agua,Gotera,"Apaga la llave más cercana."
-Agua,Agua,"Busca el origen de inmediato."
-Agua,Agua,"Seca con trapos."
-Agua,Chorro,"Reduce el flujo cerrando parcialmente la llave."
-Agua,Chorro,"Cúbrete temporalmente con una bolsa plástica."
-Agua,Llave,"Aprieta con herramienta."
-Agua,Llave,"Cierra la llave principal."
-Agua,Contador,"Anota la lectura diaria para ver si hay consumo raro."
-Agua,Sin agua,"Revisa si los vecinos tienen agua."
-Agua,Sin agua,"Usa agua almacenada si hay."
-Electricidad,Foco,"Verifica si el foco está bien ajustado."
-Electricidad,Foco,"Prueba el foco en otro socket."
-Electricidad,Sin encender,"Asegúrate de que el interruptor esté en la posición correcta."
-Electricidad,Sin encender,"Revisa si hay energía eléctrica en el área."
-Electricidad,Quemado,"Desconecta de inmediato el dispositivo afectado."
-Electricidad,Quemado,"Reemplaza o consulta a un técnico."
-Electricidad,Cable,"Inspecciona si el cable presenta cortes o daños visibles."
-Electricidad,Cable,"Evita tocarlo si está pelado o expuesto; llama a un profesional."
-Electricidad,Corto circuito,"Apaga la corriente desde la caja principal."
-Electricidad,Corto circuito,"Solicita ayuda técnica urgente."
-Electricidad,Sin luz,"Verifica si otros aparatos eléctricos funcionan."
-Electricidad,Sin luz,"Consulta si hay reporte de fallos eléctricos en la zona."
-Electricidad,Apagones,"Usa linternas o lámparas de emergencia."
-Electricidad,Apagones,"Espera instrucciones de la compañía eléctrica si es general."
-Electricidad,Iluminación,"Verifica el estado de focos o bombillas en el área afectada."
-Electricidad,Iluminación,"Revisa interruptores y tomacorrientes."
-Electricidad,Fusible,"Reemplaza el fusible quemado con uno del mismo amperaje."
-Electricidad,Fusible,"Si sigue fallando, consulta a un electricista."
-Electricidad,Conector,"Asegúrate que esté bien instalado y firme."
-Electricidad,Conector,"No uses conectores sueltos o dañados."
-Electricidad,Tomacorriente,"Comprueba si otros tomacorrientes funcionan."
-Electricidad,Tomacorriente,"Si no, puede ser un problema de circuito; busca ayuda profesional."
-Electricidad,Bombilla,"Cambia la bombilla por una nueva si no enciende."
-Electricidad,Bombilla,"Asegúrate de usar el tipo correcto (LED, incandescente, etc.)."
-Electricidad,Plafonera,"Revisa si la bombilla dentro de la plafonera está en buen estado."
-Electricidad,Plafonera,"Asegúrate de que los cables estén bien conectados."
-Electricidad,Contador,"Observa si el contador marca consumo o está apagado."
-Electricidad,Contador,"Contacta a tu proveedor si detectas anomalías."
-Electricidad,Caja de registro,"Inspecciona si hay cables sueltos o quemados."
-Electricidad,Caja de registro,"No manipules la caja sin cortar la corriente general."
-Electricidad,Palanca,"Verifica si está abajo (desactivada)."
-Electricidad,Palanca,"Sube la palanca para reactivar, solo si es seguro."
-Electricidad,Fuego,"Desconecta la energía desde la caja principal inmediatamente."
-Electricidad,Fuego,"Usa un extintor clase C (eléctrico) y llama a los bomberos."
-Drenaje,Baño,"Revisa si hay objetos obstruyendo el desagüe."
-Drenaje,Baño,"Usa un destapador para intentar liberar el paso."
-Drenaje,Lavamanos,"Verifica si el sifón está tapado o suelto."
-Drenaje,Lavamanos,"Usa productos para destapar drenajes si es necesario."
-Drenaje,Pila,"Limpia la rejilla o filtro de la pila para evitar acumulaciones."
-Drenaje,Pila,"Asegúrate de que el desagüe esté libre."
-Drenaje,Lavaplatos,"Retira residuos de comida que puedan obstruir el drenaje."
-Drenaje,Lavaplatos,"Usa agua caliente y detergente para deshacer grasa acumulada."
-Drenaje,Tapado,"Utiliza un destapador o sonda para desbloquear el flujo."
-Drenaje,Tapado,"Si no funciona, considera llamar a un plomero."
-Drenaje,Reposadera,"Revisa si la rejilla de la reposadera está obstruida."
-Drenaje,Reposadera,"Limpia el área y usa agua caliente para facilitar el drenaje."
-Drenaje,Tapadera,"Asegúrate de que la tapadera esté bien colocada."
-Drenaje,Tapadera,"Limpia restos de suciedad o residuos atrapados."
-Drenaje,Manguera,"Verifica si la manguera está doblada o tapada."
-Drenaje,Manguera,"Enjuaga con agua a presión para destaparla."
-Drenaje,Tubo,"Revisa si el tubo presenta grietas, fugas o bloqueos."
-Drenaje,Tubo,"Si está dañado, reemplázalo o llama a un técnico."
-Drenaje,Roto,"Evita seguir usando el área afectada para no agravar el daño."
-Drenaje,Roto,"Repara o sustituye la pieza rota cuanto antes."
-Drenaje,Candela,"(Fugas leves) Detectar escape de aire o agua (¡con mucho cuidado!)."
-Drenaje,Candela,"No uses fuego cerca de acumulaciones de gases o químicos."
-Drenaje,Tapaderas,"Asegúrate de que todas las tapaderas estén firmes y limpias."
-Drenaje,Tapaderas,"Reemplaza las tapaderas rotas o extraviadas."
-Drenaje,Hundimiento,"Señaliza el área para evitar accidentes."
-Drenaje,Hundimiento,"Contacta a un especialista para evaluar el daño estructural."
-Seguridad,Sospechosos,"Avisar por radio a seguridad."
-Seguridad,Indigente,"Asegure su puerta."
-Seguridad,Asalto,"No resistir."
-Seguridad,Asalto,"Protegerse."
-Seguridad,Robo,"Protegerse."
-Seguridad,Robo,"Resguardarse en un lugar seguro."
-Seguridad,Portón abierto,"Cerrar."
-Seguridad,Pelea,"No meterse."
-Seguridad,Pelea,"Solo mirar de lejos."
-Seguridad,Conflictos,"Tratar de calmar con respeto."
-Seguridad,Conflictos,"Utiliza Palabras tranquilas."
-Seguridad,Alarmas,"Ver de dónde suena."
-Seguridad,Alarmas,"Avisar al residente."
-Seguridad,No autorizado,"Preguntar a quién visita."
-Seguridad,No autorizado,"No dejar pasar hasta confirmar."
-Seguridad,Conos,"Volver a colocarlos."
-Seguridad,Conos,"Quitar el cono."
-Seguridad,Proceso de verificación,"Preguntar nombre."
-Seguridad,Proceso de verificación,"Pedir identificación."
-Ruidos,Música,"Pedir que le bajen el volumen."
-Ruidos,Fiestas,"Verificar el horario permitido."
-Ruidos,Reuniones,"Verificar el horario permitido."
-Ruidos,Eventos,"Verificar el horario permitido."
-Ruidos,Visitas,"Verificar el horario permitido."
-Ruidos,Visitas,"Analizar la situación."
-Ruidos,Disturbios,"Evitar incorporarse a ellos."
-Ruidos,Disturbios,"Mantener una distancia."
-Ruidos,Pleitos,"Mantener la calma."
-Ruidos,Alarmas,"Verificar el origen de procedencia."
-Ruidos,Alarmas,"Esperar que la alarma sea apagada durante un tiempo de 2 minutos."
-Ruidos,Discusiones,"Obtener el contexto del origen de la pelea."
-Ruidos,Golpes,"No intervenir."
-Ruidos,Golpes,"Analizar el motivo de origen."
-Ruidos,Televisión,"Dialogar."
-Ruidos,Televisión,"Observar los horarios permitidos para ruidos."
-Ruidos,Radio,"Observar los horarios permitidos para ruidos."
-Ruidos,Carros,"Tomar datos de la placa y explicar motivo."
-Ruidos,Motos,"Tomar datos de la placa y explicar motivo."
-Ruidos,Perros,"Analizar la situación y el tiempo."
-Ruidos,Pájaro,"Analizar la situación y el tiempo."
-Ruidos,Gatos,"Analizar la situación y el tiempo."
-Jardín,Grama,"Recortar la grama."
-Jardín,Grama,"Regarla."
-Jardín,Grama,"Siembra más grama."
-Jardín,Grama,"Revisa si tiene plagas."
-Jardín,Césped,"Cortar si está muy alto."
-Jardín,Césped,"Apoda el césped."
-Jardín,Césped,"Utiliza una escoba de jardín para limpiarlo."
-Jardín,Corte,"Cortar parejo."
-Jardín,Corte,"Cortar con cuidado."
-Jardín,Árbol,"Revise si hay ramas secas."
-Jardín,Árbol,"Recorte el árbol."
-Jardín,Flores,"Riega las flores."
-Jardín,Flores,"Limpia."
-Jardín,Flores,"Quita ramas secas."
-Jardín,Piedrín,"Barre con una escoba."
-Jardín,Piedrín,"Acomoda."
-Jardín,Piedrín,"Mezcla con tierra."
-Jardín,Piedrín,"Rellena zonas vacías."
-Jardín,Arriates,"Quitar la maleza."
-Jardín,Arriates,"Dejar el borde limpio."
-Jardín,Arriates,"Rellena con tierra."
-Jardín,Riego,"Riega en la mañana."
-Jardín,Riego,"Riega en la tarde."
-Jardín,Riego,"Asegúrate de no echar mucha agua."
-Jardín,Limpieza,"Recoge hojas."
-Jardín,Limpieza,"Recoge basura."
-Jardín,Limpieza,"Barre."
-Jardín,Siembra,"Escoge buena tierra."
-Jardín,Siembra,"Siembra en época correcta."
-Estacionamiento,Carro,"Verifica si el carro está bien estacionado y no obstruye entradas."
-Estacionamiento,Carro,"Si está mal ubicado, busca al propietario o llama al control de tránsito."
-Estacionamiento,Moto,"Asegúrate que la moto esté dentro del área designada."
-Estacionamiento,Moto,"Evita estacionarla en zonas peatonales o frente a portones."
-Estacionamiento,Mal estacionado,"Toma evidencia (foto) si es necesario."
-Estacionamiento,Mal estacionado,"Contacta al encargado del área o reporta a la autoridad correspondiente."
-Estacionamiento,Banqueta,"No bloquees el paso peatonal."
-Estacionamiento,Banqueta,"Estaciona en áreas autorizadas, respetando rampas y accesos."
-Estacionamiento,Portón,"No estaciones frente a portones, podrías impedir el acceso o salida."
-Estacionamiento,Portón,"Busca señales de ""No estacionar"" cerca de portones."
-Estacionamiento,Puerta,"Deja siempre libre el acceso de puertas principales y de emergencia."
-Estacionamiento,Puerta,"Si ves un vehículo bloqueando, repórtalo de forma respetuosa."
-Estacionamiento,Casa,"Respeta los espacios de estacionamiento frente a viviendas."
-Estacionamiento,Casa,"Evita estacionarte sin autorización en entradas de casas."
-Estacionamiento,Parqueo,"Utilizar siempre los espacios asignados."
-Estacionamiento,Parqueo,"Seguir las señales y demarcaciones del área de parqueo."
-Estacionamiento,Equivocado,"Si estacionaste en un lugar incorrecto, mueve el vehículo lo antes posible."
-Estacionamiento,Equivocado,"Verifica siempre las señales antes de estacionarte."
-Estacionamiento,En frente,"Asegúrate de no bloquear cocheras, entradas o salidas de vehículos."
-Estacionamiento,En frente,"Mantén distancia adecuada frente a accesos importantes."
-Mantenimiento,Remodelación,"Asegure de que un experto en el área la realice."
-Mantenimiento,Remodelación,"Realícela en horarios hábiles."
-Mantenimiento,Polvo,"Limpiar el área correctamente."
-Mantenimiento,Polvo,"Mantener el área limpia para no tener inconvenientes de polvo."
-Mantenimiento,Suciedad,"Limpiar correctamente el área."
-Mantenimiento,Ripio,"Asegúrese de dejarlo en un lugar donde no moleste."
-Mantenimiento,Ripio,"El plazo máximo para tener ripio es de una semana."
-Mantenimiento,Ripio,"Realice el proceso de extracción de ripio correctamente."
-Mantenimiento,Drenaje,"Vierta soda cáustica en el lugar."
-Mantenimiento,Drenaje,"Vierta agua caliente sobre la soda cáustica a una distancia media o lejana pero no cercana."
-Mantenimiento,Drenaje,"Llame a alguien de mantenimiento."
-Mantenimiento,Baño,"No utilizar el baño si esté está tapado."
-Mantenimiento,Baño,"Ver el origen del problema y buscar una solución."
-Mantenimiento,Lavamanos,"No utilizarlo si este está tapado."
-Mantenimiento,Lavamanos,"Analizar el origen del problema."
-Mantenimiento,Área compartida,"Describa correctamente el problema."
-Mantenimiento,Área compartida,"Indique que su problema no ha sido resuelto para poder solucionarlo."
-Mantenimiento,Puerta,"Vierta aceite en las bisagras para no tener ruido."
-Mantenimiento,Puerta,"Vierta aceite la chapa para que este entre más fácilmente, posteriormente introduzca la llave varias veces y al terminarlo de hacer limpie la parte de la chapa y la llave que utilizó."
-Mantenimiento,Pintura,"Describa el área que desea pintar."
-Mantenimiento,Pintura,"Indique que su problema no ha sido resuelto para poder ir a pintar."
-Mantenimiento,Portón,"Si tiene problema con las bisagras o pasa manos vierta aceite en ellos."
-Mantenimiento,Portón,"Si tiene rodos vea el estado de ellos."
-Mantenimiento,Portón,"Vierta aceite la chapa para que este entre más fácilmente, posteriormente introduzca la llave varias veces y al terminarlo de hacer limpie la parte de la chapa y la llave que utilizó."
-Mantenimiento,Piso,"Remueva la parte quebrada."
-Mantenimiento,Piso,"Contrate a un reparador de pisos."
-Mantenimiento,Humedad,"Vea las zonas afectadas."
-Mantenimiento,Humedad,"Ver si un tubo de agua no está dañado o tiene fuga."
-Mantenimiento,Humedad,"Si la humedad es fuerte evite tener objetos cerca del área húmeda ya que los puede dañar."
-Mantenimiento,Humedad,"Si desea comprar y aplicar impermeabilizante en el techo, observe el área a pintar y observe los años de durabilidad y color del impermeabilizante y a la vez compre pegamento sellador de grietas."
-Mantenimiento,Humedad,"Verifique que el día esté soleado y el área no esté húmeda por encima."
-Mantenimiento,Humedad,"Para la aplicación del sellador de grietas necesita primero barrer el área y posteriormente lavarla y esperar que se seque, aplique el sellador de grietas y deje que este seque el tiempo indicado del fabricante."
-Mantenimiento,Humedad,"Para aplicar la primera capa impermeabilizante puede realizarla de forma vertical u horizontal y deje que esta seque por un tiempo indicado por el fabricante."
-Mantenimiento,Humedad,"Para la segunda capa de impermeabilizante aplíquelo opuesta a la forma que aplicó la primera capa y déjelo secar."
-Mantenimiento,Pared,"Si desea rellenar hoyos pequeños utilice yeso."
-Mantenimiento,Pared,"Tener prevención con los objetos cercanos al problema."
-Mantenimiento,Techo,"Evitar arreglar el problema."
-Mantenimiento,Techo,"Tener prevención con los objetos cercanos al problema."
-Mantenimiento,Terraza,"Indicar de forma precisa el motivo."
-Mantenimiento,Terraza,"Indicar la opción NO en la pregunta ha resuelto su problema conforme a las indicaciones."
-Mantenimiento,Ventanas,"Si tiene problemas en las bisagras aplicar aceite."
-Mantenimiento,Vidrios,"Indicar de forma precisa el motivo."
-Mantenimiento,Vidrios,"Indicar la opción NO en la pregunta ha resuelto su problema conforme a las indicaciones."
-Limpieza,Banqueta,"Eche agua en la banqueta."
-Limpieza,Banqueta,"Riegue jabón en polvo en el área mojada de la banqueta."
-Limpieza,Banqueta,"Utilice la escoba para limpiar."
-Limpieza,Banqueta,"Eche agua para remover el jabón."
-Limpieza,Sucio,"Recoja la basura deposite en un bote de basura."
-Limpieza,Sucio,"Limpie con agua jabón."
-Limpieza,Barrer,"Póngase una mascarilla."
-Limpieza,Barrer,"Utilice una escoba para barrer el área sucia."
-Limpieza,Barrer,"Recoja el polvo o recibos con la pala."
-Limpieza,Barrer,"Vierta los recibos en el bote de basura."
-Limpieza,Basura,"Recoja la basura y deposítela en un bote de basura."
-Limpieza,Basura,"Verifique los horarios de extracción de basura."
-Limpieza,Basura,"Utilice un bote de basura con tapadera para evitar que las bolsas se rompan."
-Limpieza,Drenaje,"No utilice el área afectada."
-Limpieza,Drenaje,"Vierta soda cáustica en el área afectada y posteriormente eche agua caliente encima de la soda cáustica a una distancia razonable pero no cerca."
-Limpieza,Área compartida,"Utilice los utensilios de limpieza de la bodega para realizar la limpieza, posteriormente devolverlos a su lugar."
-Limpieza,Vidrios,"Recoja con una escoba y pala los fragmentos de vidrio del área."
-Limpieza,Vidrios,"Evite tocar con las manos los fragmentos de vidrio."
-Limpieza,Ventana,"Recoja con una escoba y pala los fragmentos de vidrio del área."
-Limpieza,Ventana,"Evite estar cerca del área."
-Limpieza,Ventana,"Trate de cubrir con nylon el área del vidrio quebrado teniendo mucho cuidado."
-Limpieza,Baños,"Utilice los utensilios de limpieza para realizar la limpieza."
-Limpieza,Baños,"Si encuentra papel u objetos trate de sacarlos protegiéndose las manos con guantes."
+Area,Problema,Solucion,Prioridad
+Agua,Tubo roto,Cerrar la válvula principal de paso.,Alta
+Agua,Tubo roto,Colocar un tapón en el tubo.,Alta
+Agua,Tubo roto,Use cinta de teflón.,Media
+Agua,Manguera cortada,Cerrar paso de agua al área afectada (if possible).,Alta
+Agua,Manguera cortada,Colocar un tapón en la manguera.,Media
+Agua,Manguera cortada,Cerrar el chorro de agua.,Media
+Agua,Manguera cortada,Cut the damaged part.,Media
+Agua,Fuga,Seca bien y coloca cinta de teflón.,Alta
+Agua,Fuga,Pon un trapo bien amarrado.,Media
+Agua,Fuga de agua,Coloca una cubeta debajo.,Media
+Agua,Fuga de agua,Cierra la llave más cercana.,Alta
+Agua,Gotera,Coloca un recipiente debajo.,Baja
+Agua,Gotera,Apaga la llave más cercana.,Media
+Agua,Agua,Busca el origen de inmediato.,Alta
+Agua,Agua,Seca con trapos.,Media
+Agua,Chorro,Reduce el flujo cerrando parcialmente la llave.,Media
+Agua,Chorro,Cúbrete temporalmente con una bolsa plástica.,Baja
+Agua,Llave,Aprieta con herramienta.,Media
+Agua,Llave,Cierra la llave principal.,Alta
+Agua,Contador,Anota la lectura diaria para ver si hay consumo raro.,Baja
+Agua,Sin agua,Revisa si los vecinos tienen agua.,Media
+Agua,Sin agua,Usa agua almacenada si hay.,Media
+Electricidad,Foco,Verifica si el foco está bien ajustado.,Baja
+Electricidad,Foco,Prueba el foco en otro socket.,Baja
+Electricidad,Sin encender,Asegúrate de que el interruptor esté en la posición correcta.,Baja
+Electricidad,Sin encender,Revisa si hay energía eléctrica en el área.,Media
+Electricidad,Quemado,Desconecta de inmediato el dispositivo afectado.,Alta
+Electricidad,Quemado,Reemplaza o consulta a un técnico.,Alta
+Electricidad,Cable,Inspecciona si el cable presenta cortes o daños visibles.,Alta
+Electricidad,Cable,Evita tocarlo si está pelado o expuesto; llama a un profesional.,Alta
+Electricidad,Corto circuito,Apaga la corriente desde la caja principal.,Alta
+Electricidad,Corto circuito,Solicita ayuda técnica urgente.,Alta
+Electricidad,Sin luz,Verifica si otros aparatos eléctricos funcionan.,Media
+Electricidad,Sin luz,Consulta si hay reporte de fallos eléctricos en la zona.,Media
+Electricidad,Apagones,Usa linternas o lámparas de emergencia.,Media
+Electricidad,Apagones,Espera instrucciones de la compañía eléctrica si es general.,Baja
+Electricidad,Iluminación,Verifica el estado de focos o bombillas en el área afectada.,Baja
+Electricidad,Iluminación,Revisa interruptores y tomacorrientes.,Baja
+Electricidad,Fusible,Reemplaza el fusible quemado con uno del mismo amperaje.,Media
+Electricidad,Fusible,Si sigue fallando, consulta a un electricista.,Media
+Electricidad,Conector,Asegúrate que esté bien instalado y firme.,Baja
+Electricidad,Conector,No uses conectores sueltos o dañados.,Media
+Electricidad,Tomacorriente,Comprueba si otros tomacorrientes funcionan.,Baja
+Electricidad,Tomacorriente,Si no, puede ser un problema de circuito; busca ayuda profesional.,Media
+Electricidad,Bombilla,Cambia la bombilla por una nueva si no enciende.,Baja
+Electricidad,Bombilla,Asegúrate de usar el tipo correcto (LED, incandescente, etc.).,Baja
+Electricidad,Plafonera,Revisa si la bombilla dentro de la plafonera está en buen estado.,Baja
+Electricidad,Plafonera,Asegúrate de que los cables estén bien conectados.,Media
+Electricidad,Contador,Observa si el contador marca consumo o está apagado.,Media
+Electricidad,Contador,Contacta a tu proveedor si detectas anomalías.,Media
+Electricidad,Caja de registro,Inspecciona si hay cables sueltos o quemados.,Alta
+Electricidad,Caja de registro,No manipules la caja sin cortar la corriente general.,Alta
+Electricidad,Palanca,Verifica si está abajo (desactivada).,Media
+Electricidad,Palanca,Sube la palanca para reactivar, solo si es seguro.,Media
+Electricidad,Fuego,Desconecta la energía desde la caja principal inmediatamente.,Alta
+Electricidad,Fuego,Usa un extintor clase C (eléctrico) y llama a los bomberos.,Alta
+Drenaje,Baño,Revisa si hay objetos obstruyendo el desagüe.,Media
+Drenaje,Baño,Usa un destapador para intentar liberar el paso.,Media
+Drenaje,Lavamanos,Verifica si el sifón está tapado o suelto.,Media
+Drenaje,Lavamanos,Usa productos para destapar drenajes si es necesario.,Media
+Drenaje,Pila,Limpia la rejilla o filtro de la pila para evitar acumulaciones.,Baja
+Drenaje,Pila,Asegúrate de que el desagüe esté libre.,Baja
+Drenaje,Lavaplatos,Retira residuos de comida que puedan obstruir el drenaje.,Baja
+Drenaje,Lavaplatos,Usa agua caliente y detergente para deshacer grasa acumulada.,Baja
+Drenaje,Tapado,Utiliza un destapador o sonda para desbloquear el flujo.,Media
+Drenaje,Tapado,Si no funciona, considera llamar a un plomero.,Media
+Drenaje,Reposadera,Revisa si la rejilla de la reposadera está obstruida.,Baja
+Drenaje,Reposadera,Limpia el área y usa agua caliente para facilitar el drenaje.,Baja
+Drenaje,Tapadera,Asegúrate de que la tapadera esté bien colocada.,Baja
+Drenaje,Tapadera,Limpia restos de suciedad o residuos atrapados.,Baja
+Drenaje,Manguera,Verifica si la manguera está doblada o tapada.,Baja
+Drenaje,Manguera,Enjuaga con agua a presión para destaparla.,Baja
+Drenaje,Tubo,Revisa si el tubo presenta grietas, fugas o bloqueos.,Media
+Drenaje,Tubo,Si está dañado, reemplázalo o llama a un técnico.,Media
+Drenaje,Roto,Evita seguir usando el área afectada para no agravar el daño.,Media
+Drenaje,Roto,Repara o sustituye la pieza rota cuanto antes.,Media
+Drenaje,Candela,"(Fugas leves) Detectar escape de aire o agua (¡con mucho cuidado!).",Alta
+Drenaje,Candela,No uses fuego cerca de acumulaciones de gases o químicos.,Alta
+Drenaje,Tapaderas,Asegúrate de que todas las tapaderas estén firmes y limpias.,Baja
+Drenaje,Tapaderas,Reemplaza las tapaderas rotas o extraviadas.,Baja
+Drenaje,Hundimiento,Señaliza el área para evitar accidentes.,Alta
+Drenaje,Hundimiento,Contacta a un especialista para evaluar el daño estructural.,Alta
+Seguridad,Sospechosos,Avisar por radio a seguridad.,Alta
+Seguridad,Indigente,Asegure su puerta.,Alta
+Seguridad,Asalto,No resistir.,Alta
+Seguridad,Asalto,Protegerse.,Alta
+Seguridad,Robo,Protegerse.,Alta
+Seguridad,Robo,Resguardarse en un lugar seguro.,Alta
+Seguridad,Portón abierto,Cerrar.,Alta
+Seguridad,Pelea,No meterse.,Alta
+Seguridad,Pelea,Solo mirar de lejos.,Media
+Seguridad,Conflictos,Tratar de calmar con respeto.,Media
+Seguridad,Conflictos,Utiliza Palabras tranquilas.,Media
+Seguridad,Alarmas,Ver de dónde suena.,Alta
+Seguridad,Alarmas,Avisar al residente.,Alta
+Seguridad,No autorizado,Preguntar a quién visita.,Alta
+Seguridad,No autorizado,No dejar pasar hasta confirmar.,Alta
+Seguridad,Conos,Volver a colocarlos.,Baja
+Seguridad,Conos,Quitar el cono.,Baja
+Seguridad,Proceso de verificación,Preguntar nombre.,Media
+Seguridad,Proceso de verificación,Pedir identificación.,Media
+Ruidos,Música,Pedir que le bajen el volumen.,Baja
+Ruidos,Fiestas,Verificar el horario permitido.,Baja
+Ruidos,Reuniones,Verificar el horario permitido.,Baja
+Ruidos,Eventos,Verificar el horario permitido.,Baja
+Ruidos,Visitas,Verificar el horario permitido.,Baja
+Ruidos,Visitas,Analizar la situación.,Baja
+Ruidos,Disturbios,Evitar incorporarse a ellos.,Media
+Ruidos,Disturbios,Mantener una distancia.,Media
+Ruidos,Pleitos,Mantener la calma.,Media
+Ruidos,Alarmas,Verificar el origen de procedencia.,Media
+Ruidos,Alarmas,Esperar que la alarma sea apagada durante un tiempo de 2 minutos.,Media
+Ruidos,Discusiones,Obtener el contexto del origen de la pelea.,Baja
+Ruidos,Golpes,No intervenir.,Media
+Ruidos,Golpes,Analizar el motivo de origen.,Media
+Ruidos,Televisión,Dialogar.,Baja
+Ruidos,Televisión,Observar los horarios permitidos para ruidos.,Baja
+Ruidos,Radio,Observar los horarios permitidos para ruidos.,Baja
+Ruidos,Carros,Tomar datos de la placa y explicar motivo.,Baja
+Ruidos,Motos,Tomar datos de la placa y explicar motivo.,Baja
+Ruidos,Perros,Analizar la situación y el tiempo.,Baja
+Ruidos,Pájaro,Analizar la situación y el tiempo.,Baja
+Ruidos,Gatos,Analizar la situación y el tiempo.,Baja
+Jardín,Grama,Recortar la grama.,Baja
+Jardín,Grama,Regarla.,Baja
+Jardín,Grama,Siembra más grama.,Baja
+Jardín,Grama,Revisa si tiene plagas.,Baja
+Jardín,Césped,Cortar si está muy alto.,Baja
+Jardín,Césped,Apoda el césped.,Baja
+Jardín,Césped,Utiliza una escoba de jardín para limpiarlo.,Baja
+Jardín,Corte,Cortar parejo.,Baja
+Jardín,Corte,Cortar con cuidado.,Baja
+Jardín,Árbol,Revise si hay ramas secas.,Baja
+Jardín,Árbol,Recorte el árbol.,Baja
+Jardín,Flores,Riega las flores.,Baja
+Jardín,Flores,Limpia.,Baja
+Jardín,Flores,Quita ramas secas.,Baja
+Jardín,Piedrín,Barre con una escoba.,Baja
+Jardín,Piedrín,Acomoda.,Baja
+Jardín,Piedrín,Mezcla con tierra.,Baja
+Jardín,Piedrín,Rellena zonas vacías.,Baja
+Jardín,Arriates,Quitar la maleza.,Baja
+Jardín,Arriates,Dejar el borde limpio.,Baja
+Jardín,Arriates,Rellena con tierra.,Baja
+Jardín,Riego,Riega en la mañana.,Baja
+Jardín,Riego,Riega en la tarde.,Baja
+Jardín,Riego,Asegúrate de no echar mucha agua.,Baja
+Jardín,Limpieza,Recoge hojas.,Baja
+Jardín,Limpieza,Recoge basura.,Baja
+Jardín,Limpieza,Barre.,Baja
+Jardín,Siembra,Escoge buena tierra.,Baja
+Jardín,Siembra,Siembra en época correcta.,Baja
+Estacionamiento,Carro,Verifica si el carro está bien estacionado y no obstruye entradas.,Media
+Estacionamiento,Carro,Si está mal ubicado, busca al propietario o llama al control de tránsito.,Media
+Estacionamiento,Moto,Asegúrate que la moto esté dentro del área designada.,Media
+Estacionamiento,Moto,Evita estacionarla en zonas peatonales o frente a portones.,Media
+Estacionamiento,Mal estacionado,Toma evidencia (foto) si es necesario.,Media
+Estacionamiento,Mal estacionado,Contacta al encargado del área o reporta a la autoridad correspondiente.,Media
+Estacionamiento,Banqueta,No bloquees el paso peatonal.,Media
+Estacionamiento,Banqueta,Estaciona en áreas autorizadas, respetando rampas y accesos.,Media
+Estacionamiento,Portón,No estaciones frente a portones, podrías impedir el acceso o salida.,Alta
+Estacionamiento,Portón,Busca señales de "No estacionar" cerca de portones.,Alta
+Estacionamiento,Puerta,Deja siempre libre el acceso de puertas principales y de emergencia.,Alta
+Estacionamiento,Puerta,Si ves un vehículo bloqueando, repórtalo de forma respetuosa.,Alta
+Estacionamiento,Casa,Respeta los espacios de estacionamiento frente a viviendas.,Media
+Estacionamiento,Casa,Evita estacionarte sin autorización en entradas de casas.,Media
+Estacionamiento,Parqueo,Utilizar siempre los espacios asignados.,Baja
+Estacionamiento,Parqueo,Seguir las señales y demarcaciones del área de parqueo.,Baja
+Estacionamiento,Equivocado,Si estacionaste en un lugar incorrecto, mueve el vehículo lo antes posible.,Media
+Estacionamiento,Equivocado,Verifica siempre las señales antes de estacionarte.,Media
+Estacionamiento,En frente,Asegúrate de no bloquear cocheras, entradas o salidas de vehículos.,Media
+Estacionamiento,En frente,Mantén distancia adecuada frente a accesos importantes.,Media
+Mantenimiento,Remodelación,Asegure de que un experto en el área la realice.,Baja
+Mantenimiento,Remodelación,Realícela en horarios hábiles.,Baja
+Mantenimiento,Polvo,Limpiar el área correctamente.,Baja
+Mantenimiento,Polvo,Mantener el área limpia para no tener inconvenientes de polvo.,Baja
+Mantenimiento,Suciedad,Limpiar correctamente el área.,Baja
+Mantenimiento,Ripio,Asegúrese de dejarlo en un lugar donde no moleste.,Baja
+Mantenimiento,Ripio,El plazo máximo para tener ripio es de una semana.,Baja
+Mantenimiento,Ripio,Realice el proceso de extracción de ripio correctamente.,Baja
+Mantenimiento,Drenaje,Vierta soda cáustica en el lugar.,Media
+Mantenimiento,Drenaje,Vierta agua caliente sobre la soda cáustica a una distancia media o lejana pero no cercana.,Media
+Mantenimiento,Drenaje,Llame a alguien de mantenimiento.,Media
+Mantenimiento,Baño,No utilizar el baño si esté está tapado.,Media
+Mantenimiento,Baño,Ver el origen del problema y buscar una solución.,Media
+Mantenimiento,Lavamanos,No utilizarlo si este está tapado.,Media
+Mantenimiento,Lavamanos,Analizar el origen del problema.,Media
+Mantenimiento,Área compartida,Describa correctamente el problema.,Baja
+Mantenimiento,Área compartida,Indique que su problema no ha sido resuelto para poder solucionarlo.,Baja
+Mantenimiento,Puerta,Vierta aceite en las bisagras para no tener ruido.,Baja
+Mantenimiento,Puerta,Vierta aceite la chapa para que este entre más fácilmente, posteriormente introduzca la llave varias veces y al terminarlo de hacer limpie la parte de la chapa y la llave que utilizó.,Baja
+Mantenimiento,Pintura,Describa el área que desea pintar.,Baja
+Mantenimiento,Pintura,Indique que su problema no ha sido resuelto para poder ir a pintar.,Baja
+Mantenimiento,Portón,Si tiene problema con las bisagras o pasa manos vierta aceite en ellos.,Baja
+Mantenimiento,Portón,Si tiene rodos vea el estado de ellos.,Baja
+Mantenimiento,Portón,Vierta aceite la chapa para que este entre más fácilmente, posteriormente introduzca la llave varias veces y al terminarlo de hacer limpie la parte de la chapa y la llave que utilizó.,Baja
+Mantenimiento,Piso,Remueva la parte quebrada.,Media
+Mantenimiento,Piso,Contrate a un reparador de pisos.,Media
+Mantenimiento,Humedad,Vea las zonas afectadas.,Media
+Mantenimiento,Humedad,Ver si un tubo de agua no está dañado o tiene fuga.,Media
+Mantenimiento,Humedad,Si la humedad es fuerte evite tener objetos cerca del área húmeda ya que los puede dañar.,Media
+Mantenimiento,Humedad,Si desea comprar y aplicar impermeabilizante en el techo, observe el área a pintar y observe los años de durabilidad y color del impermeabilizante y a la vez compre pegamento sellador de grietas.,Media
+Mantenimiento,Humedad,Verifique que el día esté soleado y el área no esté húmeda por encima.,Media
+Mantenimiento,Humedad,Para la aplicación del sellador de grietas necesita primero barrer el área y posteriormente lavarla y esperar que se seque, aplique el sellador de grietas y deje que este seque el tiempo indicado del fabricante.,Media
+Mantenimiento,Humedad,Para aplicar la primera capa impermeabilizante puede realizarla de forma vertical u horizontal y deje que esta seque por un tiempo indicado por el fabricante.,Media
+Mantenimiento,Humedad,Para la segunda capa de impermeabilizante aplíquelo opuesta a la forma que aplicó la primera capa y déjelo secar.,Media
+Mantenimiento,Pared,Si desea rellenar hoyos pequeños utilice yeso.,Baja
+Mantenimiento,Pared,Tener prevención con los objetos cercanos al problema.,Baja
+Mantenimiento,Techo,Evitar arreglar el problema.,Media
+Mantenimiento,Techo,Tener prevención con los objetos cercanos al problema.,Media
+Mantenimiento,Terraza,Indicar de forma precisa el motivo.,Baja
+Mantenimiento,Terraza,Indicar la opción NO en la pregunta ha resuelto su problema conforme a las indicaciones.,Baja
+Mantenimiento,Ventanas,Si tiene problemas en las bisagras aplicar aceite.,Baja
+Mantenimiento,Vidrios,Indicar de forma precisa el motivo.,Baja
+Mantenimiento,Vidrios,Indicar la opción NO en la pregunta ha resuelto su problema conforme a las indicaciones.,Baja
+Limpieza,Banqueta,Eche agua en la banqueta.,Baja
+Limpieza,Banqueta,Riegue jabón en polvo en el área mojada de la banqueta.,Baja
+Limpieza,Banqueta,Utilice la escoba para limpiar.,Baja
+Limpieza,Banqueta,Eche agua para remover el jabón.,Baja
+Limpieza,Sucio,Recoja la basura deposite en un bote de basura.,Baja
+Limpieza,Sucio,Limpie con agua jabón.,Baja
+Limpieza,Barrer,Póngase una mascarilla.,Baja
+Limpieza,Barrer,Utilice una escoba para barrer el área sucia.,Baja
+Limpieza,Barrer,Recoja el polvo o recibos con la pala.,Baja
+Limpieza,Barrer,Vierta los recibos en el bote de basura.,Baja
+Limpieza,Basura,Recoja la basura y deposítela en un bote de basura.,Baja
+Limpieza,Basura,Verifique los horarios de extracción de basura.,Baja
+Limpieza,Basura,Utilice un bote de basura con tapadera para evitar que las bolsas se rompan.,Baja
+Limpieza,Drenaje,No utilice el área afectada.,Media
+Limpieza,Drenaje,Vierta soda cáustica en el área afectada y posteriormente eche agua caliente encima de la soda cáustica a una distancia razonable pero no cerca.,Media
+Limpieza,Área compartida,Utilice los utensilios de limpieza de la bodega para realizar la limpieza, posteriormente devolverlos a su lugar.,Baja
+Limpieza,Vidrios,Recoja con una escoba y pala los fragmentos de vidrio del área.,Media
+Limpieza,Vidrios,Evite tocar con las manos los fragmentos de vidrio.,Media
+Limpieza,Ventana,Recoja con una escoba y pala los fragmentos de vidrio del área.,Media
+Limpieza,Ventana,Evite estar cerca del área.,Media
+Limpieza,Ventana,Trate de cubrir con nylon el área del vidrio quebrado teniendo mucho cuidado.,Media
+Limpieza,Baños,Utilice los utensilios de limpieza para realizar la limpieza.,Baja
+Limpieza,Baños,Si encuentra papel u objetos trate de sacarlos protegiéndose las manos con guantes.,Baja

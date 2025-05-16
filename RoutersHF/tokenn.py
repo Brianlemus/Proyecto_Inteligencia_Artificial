@@ -1,21 +1,26 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from datetime import datetime
 import csv
 import os
 
 app = Flask(__name__, template_folder='../templates')
+app.secret_key = 'tu_clave_secreta_aqui'  # Necesario para mensajes flash
 
 def cargar_diccionario():
     diccionario = {}
-    with open('diccionario.csv', mode='r', encoding='utf-8') as archivo:
-        lector = csv.DictReader(archivo)
-        for fila in lector:
-            area = fila['Area']
-            problema = fila['Problema']
-            solucion = fila['Solucion']
-            if problema not in diccionario:
-                diccionario[problema] = {'soluciones': [], 'area': area}
-            diccionario[problema]['soluciones'].append(solucion)
+    try:
+        with open('diccionario.csv', mode='r', encoding='utf-8') as archivo:
+            lector = csv.DictReader(archivo)
+            for fila in lector:
+                area = fila['Area']
+                problema = fila['Problema']
+                solucion = fila['Solucion']
+                prioridad = fila['Prioridad']
+                if problema not in diccionario:
+                    diccionario[problema] = {'soluciones': [], 'area': area, 'prioridad': prioridad}
+                diccionario[problema]['soluciones'].append(solucion)
+    except FileNotFoundError:
+        flash("El archivo diccionario.csv no existe", "error")
     return diccionario
 
 diccionario = cargar_diccionario()
@@ -37,23 +42,25 @@ def home():
         if data:
             area = data['area']
             soluciones = data['soluciones']
+            prioridad = data['prioridad']
         else:
             area = "Área desconocida"
             soluciones = ["No se encontró solución para el problema."]
-        
+            prioridad = "Por definirse"
+
         resultado = f"<h5>Área</h5><li>{area}</li><h5>Descripción</h5><li>{descripcion}</li><h5>Solución</h5><ul>"
         for solucion in soluciones:
             resultado += f"<li>{solucion}</li>"
         resultado += "</ul>"
 
-        # Generar ticket aunque la descripción sea desconocida
+        # Generar ticket provisional
         numero_ticket = obtener_numero_ticket()
         fecha = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        estado = "espera"
+        estado = "Espera"
 
-        with open('ticket.csv', mode='a', newline='') as csvfile:
+        with open('ticket.csv', mode='a', newline='', encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerow([numero_ticket, fecha, area, descripcion, estado])
+            writer.writerow([numero_ticket, fecha, prioridad, area, descripcion, estado])  
 
         return redirect(url_for('mostrar_respuesta', resultado=resultado))
 
@@ -66,37 +73,59 @@ def mostrar_respuesta():
 
 @app.route('/seguimiento_ticket', methods=['GET', 'POST'])
 def seguimiento_ticket():
-    ticket = []
     if request.method == 'POST':
         leido = request.form.get('leido')
         resuelto = request.form.get('resuelto')
 
+        # Leer todos los tickets
+        tickets = []
+        if os.path.exists('ticket.csv'):
+            with open('ticket.csv', mode='r', encoding='utf-8') as file:
+                reader = csv.reader(file)
+                tickets = list(reader)
+
+        # Si ambas respuestas son "Sí", eliminar el último ticket en espera
         if leido == "si" and resuelto == "si":
-            return redirect(url_for('barra'))  # No generar ticket
+            if tickets and tickets[-1][5] == "Espera":  # Verificar que el último está en espera
+                tickets.pop()
+                with open('ticket.csv', mode='w', newline='', encoding='utf-8') as file:
+                    writer = csv.writer(file)
+                    writer.writerows(tickets)
+                flash("No se generó ticket ya que el problema fue resuelto", "success")
+                return redirect(url_for('barra'))
+            else:
+                flash("No hay tickets pendientes para cancelar", "info")
+                return redirect(url_for('barra'))
 
-        # Generar ticket si la respuesta es "No" o "No completamente"
-        if resuelto in ["no", "no_completamente"]:
-            numero_ticket = obtener_numero_ticket()
-            fecha = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            estado = "espera"
-
-            with open('ticket.csv', mode='a', newline='') as csvfile:
-                writer = csv.writer(csvfile)
-                writer.writerow([numero_ticket, fecha, "Área desconocida", "Descripción del problema", estado])
+        # Si no se resolvió, mantener el ticket generado previamente
+        elif resuelto in ["no", "no_completamente"]:
+            flash("Ticket generado correctamente", "success")
             return redirect(url_for('seguimiento_ticket'))
 
+    # Mostrar tickets existentes
+    tickets = []
     try:
-        with open('ticket.csv', mode='r') as file:
+        with open('ticket.csv', mode='r', encoding='utf-8') as file:
             reader = csv.reader(file)
-            ticket = list(reader) 
+            tickets = list(reader)
     except FileNotFoundError:
-        pass
+        flash("No hay tickets generados aún", "info")
 
-    return render_template('seguimiento.html', ticket=ticket)
+    return render_template('seguimiento.html', ticket=tickets)
 
 @app.route('/barra')
 def barra():
     return render_template('menuAdmin.html')
 
 if __name__ == '__main__':
+    if not os.path.exists('ticket.csv'):
+        with open('ticket.csv', mode='w', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            writer.writerow(["Número", "Fecha", "Prioridad", "Área", "Problema", "Estado"])
+    
+    if not os.path.exists('diccionario.csv'):
+        with open('diccionario.csv', mode='w', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            writer.writerow(["Area", "Problema", "Solucion", "Prioridad"])
+    
     app.run(debug=True)

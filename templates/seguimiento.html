@@ -12,9 +12,10 @@
             <table class="table table-bordered table-hover text-center align-middle">
                 <thead class="table-primary">
                     <tr>
-                        <th>Número Ticket</th>
+                        <th>Numero Ticket</th>
                         <th>Fecha - Hora</th>
-                        <th>Área</th>
+                         <th>Prioridad</th>
+                        <th>Area</th>
                         <th>Problema</th>
                         <th>Estado</th>
                     </tr>
@@ -27,6 +28,7 @@
                         <td>{{ ticket[2] }}</td>
                         <td>{{ ticket[3] }}</td>
                         <td>{{ ticket[4] }}</td>
+                        <td>{{ ticket[5] }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
