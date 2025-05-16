@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>Listado Área</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="container mt-4">
+            <h3 class="text-center">Listado de Areas</h3>
+
+            <div class="table-responsive mt-4">
+                <table class="table table-striped table-hover">
+
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Id</th>
+                            <th>Area</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for area in areas %}
+                        <tr class="table-light">
+                            <td>{{ area[0] }}</td>
+                            <td>{{ area[1] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
+
+
+
+
