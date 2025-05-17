@@ -19,24 +19,22 @@ def write_tickets(tickets):
 @app.route('/')
 def index():
     ticket = read_tickets()
-    return render_template('tabla_ticket.html', ticket=ticket)
+    return render_template('editar_ticket.html', ticket=ticket)
 
-@app.route('/edit/<int:ticket_id>', methods=['GET', 'POST'])
+@app.route('/edit/<int:ticket_id>', methods=['POST'])
 def edit_ticket(ticket_id):
     tickets = read_tickets()
     
-    if request.method == 'POST':
-        # Actualizar datos
-        tickets[ticket_id][1] = request.form['fecha']
-        tickets[ticket_id][2] = request.form['prioridad']
-        tickets[ticket_id][3] = request.form['area']
-        tickets[ticket_id][4] = request.form['problema']
-        tickets[ticket_id][5] = request.form['estado']
-        write_tickets(tickets)
-        return redirect(url_for('index'))
-
-    ticket = tickets[ticket_id]
-    return render_template('editar_ticket.html', ticket=ticket, ticket_id=ticket_id)
+    # Actualizar datos del ticket
+    tickets[ticket_id][1] = request.form['fecha']
+    tickets[ticket_id][2] = request.form['prioridad']
+    tickets[ticket_id][3] = request.form['area']
+    tickets[ticket_id][4] = request.form['problema']
+    tickets[ticket_id][5] = request.form['estado']
+    
+    # Guardar los cambios en el archivo CSV
+    write_tickets(tickets)
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)
