@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template,redirect, url_for
 import pandas as pd
 import matplotlib.pyplot as plt
 from io import BytesIO
@@ -53,18 +53,22 @@ def generar_grafica_barras():
 #cambio de route
 
 @app.route('/')
+def index():
+    return redirect(url_for('mostrar_grafica_barras'))
+
+@app.route('/pie_area')
 def mostrar_grafica_pie():
     imagen = generar_grafica_pie()
     if imagen:
-        return render_template('grafica_pie.html', imagen=imagen)
+        return render_template('pie_area.html', imagen=imagen)
     else:
         return "No se pudo leer el archivo CSV o no hay datos para mostrar."
 
-@app.route('/barras')
+@app.route('/barras_area')
 def mostrar_grafica_barras():
     imagen = generar_grafica_barras()
     if imagen:
-        return render_template('grafica_barras.html', imagen=imagen)
+        return render_template('barras_area.html', imagen=imagen)
     else:
         return "No se pudo leer el archivo CSV o no hay datos para mostrar."
 
