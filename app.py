@@ -1,97 +1,258 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,jsonify,session, redirect, url_for
 import csv
 import os
+from rutas.jornada import jornada_bp  # importar el blueprint
+from rutas.puesto import puesto_bp  # importar el blueprint
+from utils.csv_utils import leer_direcciones,leer_tipos_puesto,leer_jornadas,leer_areas,guardar_csv,leer_trabajadores, leer_residentes, leer_usuarios
 
 app = Flask(__name__)
+app.secret_key = '12345'
+DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
+
 
 @app.route('/')
-def index():
+def index():    
     return render_template('login.html')
 
-@app.route('/login', methods=['POST'])
+
+@app.route('/crear')
+def crear():
+    direcciones = leer_direcciones()
+    tipos = leer_tipos_puesto()
+    jornadas=leer_jornadas()
+    areas=leer_areas()
+    return render_template('crear_usuario.html',direcciones=direcciones,tipos_puesto=tipos,jornadas=jornadas,areas=areas)
+
+
+@app.route('/guardar_residente', methods=['POST'])
+def guardar_residente():
+    error = None
+    mensaje = None
+    data = request.form
+
+    campos = ['dpi', 'nit', 'nombre_completo', 'apellidos', 'telefono',
+              'fecha_nacimiento', 'correo_electronico', 'direccion_id']
+
+    # Adaptar el nombre 'correo' del formulario a 'correo_electronico'
+    if 'correo' not in data:
+        return jsonify({'error': 'Falta correo'}), 400
+
+    fila = {
+        'dpi': data.get('dpi', ''),
+        'nit': data.get('nit', ''),
+        'nombre_completo': data.get('nombre_completo', ''),
+        'apellidos': data.get('apellidos', ''),
+        'telefono': data.get('telefono', ''),
+        'fecha_nacimiento': data.get('fecha_nacimiento', ''),
+        'correo_electronico': data.get('correo', ''),
+        'direccion_id': data.get('direccion_id', '')
+    }
+
+    for campo in campos:
+        if not fila[campo]:
+            error = f'Falta el campo {campo}'
+            break
+
+    if not error:
+        ruta_csv = os.path.join(DATA_DIR, 'residentes.csv')
+        guardar_csv(ruta_csv, campos, fila)
+        mensaje = "Residente guardado correctamente."
+    
+    direcciones = leer_direcciones()
+    tipos = leer_tipos_puesto()
+    jornadas=leer_jornadas()
+    areas=leer_areas()
+
+    return render_template('crear_usuario.html', mensaje=mensaje, error=error, direcciones=direcciones,tipos_puesto=tipos,jornadas=jornadas,areas=areas)
+    
+
+@app.route('/guardar_trabajador', methods=['POST'])
+def guardar_trabajador():
+    error = None
+    mensaje = None
+    data = request.form
+
+    campos = ['dpi', 'nit', 'nombre_completo', 'apellidos', 'telefono',
+              'fecha_nacimiento', 'correo_electronico', 'direccion_id',
+              'salario', 'tipo_puesto', 'jornada', 'area']
+
+    # Adaptar nombres según tu formulario:
+    if 'correo' not in data:
+        return jsonify({'error': 'Falta correo'}), 400
+
+    fila = {
+        'dpi': data.get('dpi', ''),
+        'nit': data.get('nit', ''),
+        'nombre_completo': data.get('nombre_completo', ''),
+        'apellidos': data.get('apellidos', ''),
+        'telefono': data.get('telefono', ''),
+        'fecha_nacimiento': data.get('fecha_nacimiento', ''),
+        'correo_electronico': data.get('correo', ''),
+        'direccion_id': data.get('direccion_id', ''),
+        'salario': data.get('salario', ''),
+        'tipo_puesto': data.get('tipo_puesto', ''),
+        'jornada': data.get('tipo_jornada', ''),
+        'area': data.get('area_id', '')
+    }
+
+    for campo in campos:
+        if not fila[campo]:
+            error = f'Falta el campo {campo}'
+            break
+
+    if not error:
+        ruta_csv = os.path.join(DATA_DIR, 'trabajadores.csv')
+        guardar_csv(ruta_csv, campos, fila)
+        mensaje = "Trabajador guardado correctamente."
+
+    # Cargar datos para selects
+    direcciones = leer_direcciones()
+    tipos_puesto = leer_tipos_puesto()
+    jornadas = leer_jornadas()
+    areas = leer_areas()
+
+    return render_template('crear_usuario.html', mensaje=mensaje, error=error,
+                           direcciones=direcciones, tipos_puesto=tipos_puesto,
+                           jornadas=jornadas, areas=areas)
+
+
+@app.route('/listado')
+def ver_datos():
+    trabajadores = leer_trabajadores()
+    residentes = leer_residentes()
+    usuarios = leer_usuarios()
+    return render_template('listado.html',
+                           trabajadores=trabajadores,
+                           residentes=residentes,
+                           usuarios=usuarios)
+
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    email = request.form['email']
-    password = request.form['password']
-
-    if os.path.exists('users.csv'):
-        with open('users.csv', mode='r') as file:
-            reader = csv.DictReader(file)
-            for row in reader:
-                if row['email'] == email and row['password'] == password:
-                    return render_template('menuAdmin.html')
-
-    # Esta línea debe estar dentro de la función
-    return render_template('login.html', error="Credenciales incorrectas")
-
-@app.route('/registro', methods=['GET', 'POST'])
-def registro():
-    roles, puestos, casas = [], [], []
-
-    if os.path.exists('roles.csv'):
-        with open('roles.csv', newline='') as f:
-            reader = csv.DictReader(f)
-            roles = [row['rol'] for row in reader]
-
-    if os.path.exists('puestos.csv'):
-        with open('puestos.csv', newline='') as f:
-            reader = csv.DictReader(f)
-            puestos = [row['puesto'] for row in reader]
-
-    if os.path.exists('casas.csv'):
-        with open('casas.csv', newline='') as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                if row and all(row.values()):
-                    casas.append(row)
-
     if request.method == 'POST':
-        correo = request.form['correo']
-        clave = request.form['clave']
-        nombre = request.form['nombre']
-        rol = request.form['rol']
-        puesto = request.form['puesto']
-        direccion = request.form['direccion']
-        numero = request.form['numero']
-        letra = request.form['letra']
-        telefono = request.form['telefono']
-        nombre_casa = request.form['nombre_casa']
-        casa_id_form = request.form.get('selectorCasa')
+        username = request.form['username'].strip()
+        password = request.form['password'].strip()
 
-        if os.path.exists('users.csv'):
-            with open('users.csv', newline='') as f:
-                reader = csv.DictReader(f)
+        ruta_csv = os.path.join(DATA_DIR, 'usuarios.csv')
+
+        # Usuario admin por defecto
+        admin_default = {
+            'dpi': '0000000000000',
+            'correo_electronico': 'admin@admin.com',
+            'username': 'admin',
+            'password': 'admin123',
+            'rol': 'administrador'
+        }
+
+        # Validar usuario admin por defecto
+        if username == admin_default['username'] and password == admin_default['password']:
+            session['username'] = admin_default['username']
+            session['rol'] = admin_default['rol']
+            return redirect(url_for('menu_admin'))
+
+        # Buscar usuario en CSV por username
+        if os.path.exists(ruta_csv):
+            with open(ruta_csv, mode='r', encoding='utf-8') as file:
+                reader = csv.DictReader(file)
                 for row in reader:
-                    if row['email'] == correo:
-                        return render_template('registro.html',
-                            error="Este correo ya está registrado.",
-                            roles=roles, puestos=puestos, casas=casas)
+                    if row['username'].strip() == username and row['password'].strip() == password:
+                        session['username'] = row['username'].strip()
+                        session['rol'] = row['rol'].strip().lower()
+                        return redirect(url_for('menu_admin'))
 
-        with open('users.csv', 'a', newline='\n') as f:
-            writer = csv.writer(f)
-            if f.tell() == 0:
-                writer.writerow(['email', 'password', 'nombre', 'rol', 'puesto'])
-            writer.writerow([correo, clave, nombre, rol, puesto])
+        return render_template('login.html', error="Credenciales incorrectas.")
 
-        #Crea casa si no se seleccionó una existente
-        if casa_id_form:
-            casa_id = casa_id_form
-        else:
-            casa_id = sum(1 for _ in open('casas.csv')) if os.path.exists('casas.csv') else 1
-            with open('casas.csv', 'a', newline='\n') as f:
-                writer = csv.writer(f)
-                if f.tell() == 0:
-                    writer.writerow(['id', 'direccion', 'numero', 'letra', 'telefono', 'nombre_casa'])
-                writer.writerow([casa_id, direccion, numero, letra, telefono, nombre_casa])
+    return render_template('login.html')
 
-        with open('usuarios_casas.csv', 'a', newline='\n') as f:
-            writer = csv.writer(f)
-            if f.tell() == 0:
-                writer.writerow(['email', 'casa_id'])
-            writer.writerow([correo, casa_id])
 
-        return f'Usuario {correo} registrado exitosamente.'
+@app.route('/menuAdmin')
+def menu_admin():
+    if 'username' not in session:
+        return redirect(url_for('login'))
 
-    return render_template('registro.html', roles=roles, puestos=puestos, casas=casas)
+    rol = session.get('rol', '')
+    username = session.get('username', '')
+
+    # Renderiza la vista con los datos de sesión para controlar acceso/visibilidad
+    return render_template('menuAdmin.html', rol=rol, username=username)
+
+@app.route('/registrar_usuario', methods=['POST'])
+def registrar_usuario():
+    dpi = request.form['dpi'].strip()
+    correo = request.form['correo'].strip()
+    username = request.form['username'].strip()
+    password = request.form['password'].strip()
+    rol = request.form['rol'].strip().lower()
+
+    ruta_usuarios = os.path.join(DATA_DIR, 'usuarios.csv')
+    rutas_roles = {
+        'residente': os.path.join(DATA_DIR, 'residentes.csv'),
+        'trabajador': os.path.join(DATA_DIR, 'trabajadores.csv')
+    }
+
+    if rol not in rutas_roles:
+        return render_template('registro.html', error="Rol inválido. Selecciona residente o trabajador.")
+
+    # Verificar si ya existe ese username, dpi o correo en usuarios (independientemente del rol)
+    if os.path.exists(ruta_usuarios):
+        with open(ruta_usuarios, newline='', encoding='utf-8') as archivo:
+            lector = csv.DictReader(archivo)
+            for fila in lector:
+                if fila['username'].strip() == username:
+                    return render_template('registro.html', error="Nombre de usuario ya registrado.")
+                if fila['dpi'].strip() == dpi and fila['rol'].strip().lower() == rol:
+                    return render_template('registro.html', error=f"Ese DPI ya tiene una cuenta de {rol}.")
+                if fila['correo_electronico'].strip().lower() == correo.lower() and fila['rol'].strip().lower() == rol:
+                    return render_template('registro.html', error=f"Ese correo ya está registrado como {rol}.")
+
+    # Verificar si el DPI y correo existen en el archivo de su rol (residente o trabajador)
+    ruta_fuente = rutas_roles[rol]
+    if not os.path.exists(ruta_fuente):
+        return render_template('registro.html', error=f"No se encontró el archivo de {rol}s.")
+
+    existe_en_rol = False
+    with open(ruta_fuente, newline='', encoding='utf-8') as archivo:
+        lector = csv.DictReader(archivo)
+        for fila in lector:
+            if fila['dpi'].strip() == dpi and fila.get('correo_electronico', '').strip().lower() == correo.lower():
+                existe_en_rol = True
+                break
+
+    if not existe_en_rol:
+        return render_template('registro.html', error=f"El DPI y el correo no existen en el archivo de {rol}s.")
+
+    # Guardar nuevo usuario
+    nuevo_usuario = {
+        'dpi': dpi,
+        'correo_electronico': correo,
+        'username': username,
+        'password': password,
+        'rol': rol
+    }
+
+    archivo_nuevo = not os.path.exists(ruta_usuarios)
+    with open(ruta_usuarios, 'a', newline='', encoding='utf-8') as archivo:
+        fieldnames = ['dpi', 'correo_electronico', 'username', 'password', 'rol']
+        escritor = csv.DictWriter(archivo, fieldnames=fieldnames)
+        if archivo_nuevo:
+            escritor.writeheader()
+        escritor.writerow(nuevo_usuario)
+
+    return render_template('registro.html', mensaje="Usuario registrado exitosamente.")
+
+
+@app.route('/registro')
+def registro_usuario():
+    return render_template('registro.html')
+
+
+@app.route('/logout')
+def logout():
+    session.clear()  # Limpia toda la sesión
+    return redirect(url_for('login'))  # Redirige a la página de login
+
+app.register_blueprint(jornada_bp)  # registrar las rutas
+app.register_blueprint(puesto_bp)  # registrar las rutas
 
 if __name__ == '__main__':
     app.run(debug=True)

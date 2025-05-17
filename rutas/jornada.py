@@ -1,11 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, Blueprint
 import csv
 import os
 
-app = Flask(__name__, template_folder='../templates')
+jornada_bp = Blueprint('jornada', __name__, template_folder='templates',url_prefix='/jornada')
+
 CSV_FILE = 'jornada.csv'
 
-@app.route('/ingreso_jornada', methods=['POST'])
+@jornada_bp.route('/ingreso_jornada', methods=['POST'])
 def ingreso_jornada():
     dias = request.form['dias']
     hora_inicio = request.form['hora_inicio']
@@ -18,7 +19,7 @@ def ingreso_jornada():
     
     return redirect(url_for('listado_jornada'))  # Redirige al listado
 
-@app.route('/listado_jornada')
+@jornada_bp.route('/listado_jornada')
 def listado_jornada():
     # Leer los datos del CSV
     jornadas = []
@@ -31,9 +32,6 @@ def listado_jornada():
 
     return render_template('listado_jornada.html', jornadas=jornadas)
 
-@app.route('/')
+@jornada_bp.route('/')
 def index():
     return render_template('crear_jornada.html')
-
-if __name__ == '__main__':
-    app.run(debug=True)
