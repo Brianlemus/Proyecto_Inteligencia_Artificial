@@ -46,10 +46,18 @@
                                     </div>
                                     <div class="modal-body">
                                         <form method="POST" action="/edit/{{ loop.index0 }}">
+                                            
+                                            <div class="mb-3">
+                                                <label for="ID" class="form-label">
+                                                    <h4>Numero ticket: {{ ticket[0] }} </h4>
+                                                </label>
+                                            </div>
+
                                             <div class="mb-3">
                                                 <label for="fecha" class="form-label">Fecha - Hora</label>
                                                 <input type="text" class="form-control" id="fecha" name="fecha" value="{{ ticket[1] }}" required>
                                             </div>
+
                                             <div class="mb-3">
                                                 <label for="prioridad" class="form-label">Prioridad</label>
                                                 <input type="text" class="form-control" id="prioridad" name="prioridad" value="{{ ticket[2] }}" required>
