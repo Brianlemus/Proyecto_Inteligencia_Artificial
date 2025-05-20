@@ -1,6 +1,8 @@
-1,2025-05-20 00:12:32,Alta,Agua,Fuga,Espera
-2,2025-05-20 00:12:43,Por definirse,Área desconocida,adsfsd,Espera
-3,2025-05-20 00:12:51,Por definirse,Área desconocida,asdfdsafff,Espera
-s,2025-05-20 00:15:00,Por definirse,Área desconocida,Perro y Gato,Espera
-r,2025-05-20 00:15:20,Por definirse,Área desconocida,dfsadf,Espera
-6,2025-05-20 00:15:44,Por definirse,Área desconocida,adsfasdf,Espera
+1,2025-05-20 00:27:02,Alta,Agua,Fuga,Finalizado
+2,2025-05-20 00:27:28,Baja,Agua,Gotera,Proceso
+3,2025-05-20 00:27:51,Media,Drenaje,Roto,Espera
+4,2025-05-20 00:28:07,Alta,Electricidad,Corto circuito,Espera
+5,2025-05-20 00:28:51,Alta,Ruido,Perro y Gato,Procesando
+6,2025-05-20 00:33:43,Por definirse,Área desconocida,Perro,Espera
+7,2025-05-20 00:43:19,Por definirse,Área desconocida,dsaf,Espera
+8,2025-05-20 00:54:08,Por definirse,Área desconocida,Perro,Espera

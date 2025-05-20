@@ -1,5 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, redirect, url_for, request, flash
 from datetime import datetime
+import pandas as pd
+import matplotlib.pyplot as plt
+from io import BytesIO
+import base64
 import csv
 import os
 from pathlib import Path
@@ -36,7 +40,103 @@ def obtener_numero_ticket():
         tickets = list(reader)
         return len(tickets) + 1
 
-@app.route('/', methods=['GET', 'POST'])
+def generar_grafica_pie_area():
+    try:
+        df = pd.read_csv('ticket.csv', header=None, names=['id', 'fecha', 'prioridad', 'area', 'problema', 'estado'])
+    except FileNotFoundError:
+        return None
+    
+    conteo_areas = df['area'].value_counts()
+    
+    plt.figure(figsize=(8, 6))
+    plt.pie(conteo_areas, labels=conteo_areas.index, autopct='%1.1f%%', startangle=140)
+    plt.title('Porcentajes en Areas')
+    plt.axis('equal')
+    
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+    imagen = base64.b64encode(buffer.getvalue()).decode('utf-8')
+    plt.close()
+    
+    return imagen
+
+def generar_grafica_pie_prioridad():
+    try:
+        df = pd.read_csv('ticket.csv', header=None, names=['id', 'fecha', 'prioridad', 'area', 'problema', 'estado'])
+    except FileNotFoundError:
+        return None
+    
+    conteo_prioridad = df['prioridad'].value_counts()
+    
+    plt.figure(figsize=(8, 6))
+    plt.pie(conteo_prioridad, labels=conteo_prioridad.index, autopct='%1.1f%%', startangle=140)
+    plt.title('Porcentaje de Prioridad')
+    plt.axis('equal')
+    
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+    imagen = base64.b64encode(buffer.getvalue()).decode('utf-8')
+    plt.close()
+    
+    return imagen
+
+def generar_grafica_barras_area():
+    try:
+        df = pd.read_csv('ticket.csv', header=None, names=['id', 'fecha', 'prioridad', 'area', 'problema', 'estado'])
+    except FileNotFoundError:
+        return None
+    
+    conteo_areas = df['area'].value_counts()
+    
+    plt.figure(figsize=(8, 6))
+    colores = ['skyblue', 'lightgreen', 'salmon', 'gold', 'lightcoral', 'lightpink']
+    conteo_areas.plot(kind='bar', color=colores[:len(conteo_areas)])
+    plt.title('Total de tickets por Area')
+    plt.xlabel('Area')
+    plt.ylabel('Numero de Tickets')
+    
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+    imagen = base64.b64encode(buffer.getvalue()).decode('utf-8')
+    plt.close()
+    
+    return imagen
+
+def generar_grafica_barras_prioridad():
+    try:
+        df = pd.read_csv('ticket.csv', header=None, names=['id', 'fecha', 'prioridad', 'area', 'problema', 'estado'])
+    except FileNotFoundError:
+        return None
+    
+    conteo_prioridad = df['prioridad'].value_counts()
+    
+    plt.figure(figsize=(8, 6))
+    colores = ['skyblue', 'lightgreen', 'salmon', 'gold', 'lightcoral', 'lightpink']
+    conteo_prioridad.plot(kind='bar', color=colores[:len(conteo_prioridad)])
+    plt.title('Total de tickets por prioridad')
+    plt.xlabel('Prioridad')
+    plt.ylabel('Número de Tickets')
+    
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+    imagen = base64.b64encode(buffer.getvalue()).decode('utf-8')
+    plt.close()
+    
+    return imagen
+
+@app.route('/')
+def index():
+    return render_template('menuAdmin.html')
+
+@app.route('/barra')
+def barra():
+    return render_template('menuAdmin.html')
+
+@app.route('/crear_ticket', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
         descripcion = request.form['descripcion']
@@ -92,10 +192,10 @@ def seguimiento_ticket():
                     writer = csv.writer(file)
                     writer.writerows(tickets)
                 flash("No se generó ticket ya que el problema fue resuelto", "success")
-                return redirect(url_for('barra'))
+                return redirect(url_for('index'))
             else:
                 flash("No hay tickets pendientes para cancelar", "info")
-                return redirect(url_for('barra'))
+                return redirect(url_for('index'))
 
         elif resuelto in ["no", "no_completamente"]:
             flash("Ticket generado correctamente", "success")
@@ -111,9 +211,8 @@ def seguimiento_ticket():
 
     return render_template('seguimiento.html', ticket=tickets)
 
-
 @app.route('/editar_ticket', methods=['GET'])
-def index():
+def editar_ticket():
     ticket = read_tickets()
     return render_template('editar_ticket.html', ticket=ticket)
 
@@ -129,7 +228,7 @@ def edit_ticket(ticket_id):
     ticket = read_tickets()
     
     if ticket_id < 0 or ticket_id >= len(ticket):
-        return redirect(url_for('index'))
+        return redirect(url_for('editar_ticket'))
     
     updated_ticket = [
         request.form.get('ticket_number', ticket[ticket_id][0]),
@@ -145,11 +244,39 @@ def edit_ticket(ticket_id):
     with CSV_FILE.open('w', newline='', encoding='utf-8') as csvfile:
         csv.writer(csvfile).writerows(ticket)
     
-    return redirect(url_for('index'))
+    return redirect(url_for('editar_ticket'))
 
-@app.route('/barra')
-def barra():
-    return render_template('menuAdmin.html')
+@app.route('/grafica_pie_area')
+def mostrar_grafica_pie_area():
+    imagen = generar_grafica_pie_area()
+    if imagen:
+        return render_template('pie_area.html', imagen=imagen)
+    else:
+        return "No se pudo leer el archivo CSV o no hay datos para mostrar."
+
+@app.route('/grafica_pie_prioridad')
+def mostrar_grafica_pie_prioridad():
+    imagen = generar_grafica_pie_prioridad()
+    if imagen:
+        return render_template('pie_prioridad.html', imagen=imagen)
+    else:
+        return "No se pudo leer el archivo CSV o no hay datos para mostrar."
+
+@app.route('/grafica_barras_area')
+def mostrar_grafica_barras_area():
+    imagen = generar_grafica_barras_area()
+    if imagen:
+        return render_template('barras_area.html', imagen=imagen)
+    else:
+        return "No se pudo leer el archivo CSV o no hay datos para mostrar."
+
+@app.route('/grafica_barras_prioridad')
+def mostrar_grafica_barras_prioridad():
+    imagen = generar_grafica_barras_prioridad()
+    if imagen:
+        return render_template('barras_prioridad.html', imagen=imagen)
+    else:
+        return "No se pudo leer el archivo CSV o no hay datos para mostrar."
 
 if __name__ == '__main__':
     if not CSV_FILE.exists():
