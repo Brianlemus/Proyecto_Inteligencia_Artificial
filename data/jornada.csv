@@ -6,4 +6,6 @@ id,nombre_jornada,hora_inicio,hora_fin
 5,Lunes a Viernes,01:28,00:29
 6,Lunes a Viernes,00:41,12:41
 7,Lunes a Viernes,00:38,00:40
-8,Lunes a Viernes,02:39,03:42
+8,Lunes a Viernes,02:39,03:429,EJEMPLO DE JORNADA
+9,PRUEBA
+10,10

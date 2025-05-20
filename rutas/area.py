@@ -1,77 +1,54 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, flash
 import os
 import csv
+from utils import csv_utils
+
+DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
+AREA_CSV = os.path.join(DATA_DIR, 'area.csv')
+
+area_bp = Blueprint('area', __name__, template_folder='templates', url_prefix='/area')
 
 
-app = Flask(__name__, template_folder='../templates')
-app.secret_key = 'secret_key'
-
-
-CSV_FILE = os.path.join(os.path.dirname(__file__), '..', 'area.csv')
-
-
-def obtener_siguiente_id():
-    if not os.path.exists(CSV_FILE) or os.path.getsize(CSV_FILE) == 0:
-        return 1  
-    with open(CSV_FILE, 'r', encoding='utf-8') as archivo:
-        lector = csv.reader(archivo)
-        filas = list(lector)
-        if filas:  
-            return int(filas[-1][0]) + 1
-        else:  
-            return 1
-
-
-def verificar_encabezados():
-    if not os.path.exists(CSV_FILE):
-        with open(CSV_FILE, 'w', newline='', encoding='utf-8') as archivo:
-            escritor = csv.writer(archivo)
-            escritor.writerow(['id', 'area'])  
-
-
-@app.route('/')
-def formulario():
+@area_bp.route('/')
+def index():
     return render_template('crear_area.html')
 
 
-@app.route('/guardar_area', methods=['POST'])
-def guardar_area():
-    nombre_area = request.form.get('nombre_area')
+@area_bp.route('/crear_area', methods=['POST'])
+def crear_area():
+    area_nombre = request.form['area'].strip()
 
-    if nombre_area:
-        with open(CSV_FILE, 'r', encoding='utf-8') as archivo:
-            lector = csv.reader(archivo)
-            areas = [row[1] for row in lector]  
-        
-        if nombre_area in areas:
-            flash('El área ya existe.', 'danger') 
-            return redirect(url_for('formulario'))
-        
-        nuevo_id = obtener_siguiente_id()
+    if not area_nombre:
+        flash('El nombre del área no puede estar vacío.', 'danger')
+        return render_template('crear_area.html')
 
-        
-        with open(CSV_FILE, 'a', newline='', encoding='utf-8') as archivo:
-            escritor = csv.writer(archivo)
-            escritor.writerow([nuevo_id, nombre_area])
+    # Leer áreas existentes
+    areas = csv_utils.read_csv(AREA_CSV)
 
-        flash('Área creada con éxito.', 'success')
-        return redirect(url_for('listado'))
-    else:
-        flash('Debe ingresar un nombre de área.', 'danger')
-        return redirect(url_for('formulario'))
+    # Generar nuevo ID autoincremental
+    try:
+        if areas:
+            last_id = max(int(a[0]) for a in areas if a[0].isdigit())
+            new_id = last_id + 1
+        else:
+            new_id = 1
+    except Exception as e:
+        flash(f'Error al procesar el archivo CSV: {e}', 'danger')
+        return render_template('crear_area.html')
+
+    # Guardar nueva área
+    try:
+        with open(AREA_CSV, mode='a', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            writer.writerow([new_id, area_nombre])
+        flash('Área creada exitosamente.', 'success')
+    except Exception as e:
+        flash(f'Error al guardar el área: {e}', 'danger')
+
+    return render_template('crear_area.html')
 
 
-@app.route('/listado')
-def listado():
-    areas = []
-    verificar_encabezados()
-
-    if os.path.exists(CSV_FILE):
-        with open(CSV_FILE, 'r', encoding='utf-8') as archivo:
-            lector = csv.reader(archivo)
-            areas = list(lector)
-
+@area_bp.route('/lista_area')
+def lista_area():
+    areas = csv_utils.read_csv(AREA_CSV)
     return render_template('lista_area.html', areas=areas)
-
-if __name__ == '__main__':
-    app.run(debug=True)

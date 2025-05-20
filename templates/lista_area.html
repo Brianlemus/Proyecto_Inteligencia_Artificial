@@ -1,42 +1,40 @@
 <!DOCTYPE html>
 <html lang="es">
-    
-    <head>
-        <meta charset="UTF-8">
-        <title>Listado Área</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
-    </head>
+<head>
+    <meta charset="UTF-8" />
+    <title>Listado de Áreas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <main class="container my-5">
+        <h3 class="text-center mb-4">Listado de Áreas</h3>
 
-    <body>
-        <div class="container mt-4">
-            <h3 class="text-center">Listado de Areas</h3>
-
-            <div class="table-responsive mt-4">
-                <table class="table table-striped table-hover">
-
-                    <thead class="table-primary">
-                        <tr>
-                            <th>Id</th>
-                            <th>Area</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {% for area in areas %}
-                        <tr class="table-light">
-                            <td>{{ area[0] }}</td>
-                            <td>{{ area[1] }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+        <div class="d-flex justify-content-start mb-3">
+            <a href="/menuAdmin" class="btn btn-outline-primary">← Volver al menú</a>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-primary">
+                    <tr>
+                        <th>ID</th>
+                        <th>ÁREA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for area in areas %}
+                    <tr>
+                        <td>{{ area[0] }}</td>
+                        <td>{{ area[1] }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="2" class="text-center text-muted">No hay áreas registradas.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
 </html>
-
-
-
-

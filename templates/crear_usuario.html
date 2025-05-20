@@ -9,7 +9,10 @@
 
 <body>
     <div class="container mt-5">        
-
+        <div class="mb-3">
+            <a href="/menuAdmin" class="btn btn-outline-secondary">← Regresar al Menú</a>
+        </div>
+    
         {% if mensaje %}
         <div class="alert alert-success" role="alert">
             {{ mensaje }}
@@ -114,18 +117,7 @@
                     <label>Correo Electrónico</label>
                     <input type="email" class="form-control" name="correo" required>
                 </div>
-            </div>
-
-            <h4>Asignación de Dirección</h4>
-            <div class="mb-3">
-                <label>Dirección</label>
-                <select class="form-select" name="direccion_id" required>
-                    <option value="" disabled selected>Seleccione una dirección</option>
-                    {% for d in direcciones %}
-                    <option value="{{ d.id }}">{{ d.texto }}</option>
-                    {% endfor %}
-                </select>
-            </div>
+            </div>            
 
             <h4>Asignación de Puesto</h4>
             <div class="mb-3">

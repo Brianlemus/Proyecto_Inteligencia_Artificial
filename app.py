@@ -3,7 +3,8 @@ import csv
 import os
 from rutas.jornada import jornada_bp  # importar el blueprint
 from rutas.puesto import puesto_bp  # importar el blueprint
-from utils.csv_utils import leer_direcciones,leer_tipos_puesto,leer_jornadas,leer_areas,guardar_csv,leer_trabajadores, leer_residentes, leer_usuarios
+from rutas.area import area_bp 
+from utils.csv_utils import leer_direcciones,leer_tipos_puesto,leer_jornadas,leer_areas,guardar_csv,leer_trabajadores, leer_residentes, leer_usuarios,read_csv
 
 app = Flask(__name__)
 app.secret_key = '12345'
@@ -33,19 +34,15 @@ def guardar_residente():
     campos = ['dpi', 'nit', 'nombre_completo', 'apellidos', 'telefono',
               'fecha_nacimiento', 'correo_electronico', 'direccion_id']
 
-    # Adaptar el nombre 'correo' del formulario a 'correo_electronico'
-    if 'correo' not in data:
-        return jsonify({'error': 'Falta correo'}), 400
-
     fila = {
-        'dpi': data.get('dpi', ''),
-        'nit': data.get('nit', ''),
-        'nombre_completo': data.get('nombre_completo', ''),
-        'apellidos': data.get('apellidos', ''),
-        'telefono': data.get('telefono', ''),
-        'fecha_nacimiento': data.get('fecha_nacimiento', ''),
-        'correo_electronico': data.get('correo', ''),
-        'direccion_id': data.get('direccion_id', '')
+        'dpi': data.get('dpi', '').strip(),
+        'nit': data.get('nit', '').strip(),
+        'nombre_completo': data.get('nombre_completo', '').strip(),
+        'apellidos': data.get('apellidos', '').strip(),
+        'telefono': data.get('telefono', '').strip(),
+        'fecha_nacimiento': data.get('fecha_nacimiento', '').strip(),
+        'correo_electronico': data.get('correo', '').strip(),
+        'direccion_id': data.get('direccion_id', '').strip()
     }
 
     for campo in campos:
@@ -54,17 +51,34 @@ def guardar_residente():
             break
 
     if not error:
-        ruta_csv = os.path.join(DATA_DIR, 'residentes.csv')
-        guardar_csv(ruta_csv, campos, fila)
-        mensaje = "Residente guardado correctamente."
-    
-    direcciones = leer_direcciones()
-    tipos = leer_tipos_puesto()
-    jornadas=leer_jornadas()
-    areas=leer_areas()
+        ruta_residentes = os.path.join(DATA_DIR, 'residentes.csv')
+        ruta_trabajadores = os.path.join(DATA_DIR, 'trabajadores.csv')
 
-    return render_template('crear_usuario.html', mensaje=mensaje, error=error, direcciones=direcciones,tipos_puesto=tipos,jornadas=jornadas,areas=areas)
-    
+        residentes = read_csv(ruta_residentes)
+        trabajadores = read_csv(ruta_trabajadores)
+
+        correos = [r[6].lower() for r in residentes[1:] + trabajadores[1:] if len(r) > 6]
+        dpis = [r[0] for r in residentes[1:] + trabajadores[1:] if len(r) > 0]
+
+        if fila['correo_electronico'].lower() in correos:
+            error = 'El correo ya está registrado en el sistema.'
+        elif fila['dpi'] in dpis:
+            error = 'El DPI ya está registrado en el sistema.'
+
+    if not error:
+        guardar_csv(ruta_residentes, campos, fila)
+        mensaje = "Residente guardado correctamente."
+
+    return render_template(
+        'crear_usuario.html',
+        mensaje=mensaje,
+        error=error,
+        direcciones=leer_direcciones(),
+        tipos_puesto=leer_tipos_puesto(),
+        jornadas=leer_jornadas(),
+        areas=leer_areas()
+    )
+
 
 @app.route('/guardar_trabajador', methods=['POST'])
 def guardar_trabajador():
@@ -73,26 +87,21 @@ def guardar_trabajador():
     data = request.form
 
     campos = ['dpi', 'nit', 'nombre_completo', 'apellidos', 'telefono',
-              'fecha_nacimiento', 'correo_electronico', 'direccion_id',
+              'fecha_nacimiento', 'correo_electronico',
               'salario', 'tipo_puesto', 'jornada', 'area']
 
-    # Adaptar nombres según tu formulario:
-    if 'correo' not in data:
-        return jsonify({'error': 'Falta correo'}), 400
-
     fila = {
-        'dpi': data.get('dpi', ''),
-        'nit': data.get('nit', ''),
-        'nombre_completo': data.get('nombre_completo', ''),
-        'apellidos': data.get('apellidos', ''),
-        'telefono': data.get('telefono', ''),
-        'fecha_nacimiento': data.get('fecha_nacimiento', ''),
-        'correo_electronico': data.get('correo', ''),
-        'direccion_id': data.get('direccion_id', ''),
-        'salario': data.get('salario', ''),
-        'tipo_puesto': data.get('tipo_puesto', ''),
-        'jornada': data.get('tipo_jornada', ''),
-        'area': data.get('area_id', '')
+        'dpi': data.get('dpi', '').strip(),
+        'nit': data.get('nit', '').strip(),
+        'nombre_completo': data.get('nombre_completo', '').strip(),
+        'apellidos': data.get('apellidos', '').strip(),
+        'telefono': data.get('telefono', '').strip(),
+        'fecha_nacimiento': data.get('fecha_nacimiento', '').strip(),
+        'correo_electronico': data.get('correo', '').strip(),        
+        'salario': data.get('salario', '').strip(),
+        'tipo_puesto': data.get('tipo_puesto', '').strip(),
+        'jornada': data.get('tipo_jornada', '').strip(),
+        'area': data.get('area_id', '').strip()
     }
 
     for campo in campos:
@@ -101,19 +110,35 @@ def guardar_trabajador():
             break
 
     if not error:
-        ruta_csv = os.path.join(DATA_DIR, 'trabajadores.csv')
-        guardar_csv(ruta_csv, campos, fila)
+        ruta_trabajadores = os.path.join(DATA_DIR, 'trabajadores.csv')
+        ruta_residentes = os.path.join(DATA_DIR, 'residentes.csv')
+
+        trabajadores = read_csv(ruta_trabajadores)
+        residentes = read_csv(ruta_residentes)
+
+        correos = [r[6].lower() for r in residentes[1:] + trabajadores[1:] if len(r) > 6]
+        dpis = [r[0] for r in residentes[1:] + trabajadores[1:] if len(r) > 0]
+
+        if fila['correo_electronico'].lower() in correos:
+            error = 'El correo ya está registrado en el sistema.'
+        elif fila['dpi'] in dpis:
+            error = 'El DPI ya está registrado en el sistema.'
+
+    if not error:
+        guardar_csv(ruta_trabajadores, campos, fila)
         mensaje = "Trabajador guardado correctamente."
 
-    # Cargar datos para selects
-    direcciones = leer_direcciones()
-    tipos_puesto = leer_tipos_puesto()
-    jornadas = leer_jornadas()
-    areas = leer_areas()
+    return render_template(
+        'crear_usuario.html',
+        mensaje=mensaje,
+        error=error,
+        direcciones=leer_direcciones(),
+        tipos_puesto=leer_tipos_puesto(),
+        jornadas=leer_jornadas(),
+        areas=leer_areas()
+    )
 
-    return render_template('crear_usuario.html', mensaje=mensaje, error=error,
-                           direcciones=direcciones, tipos_puesto=tipos_puesto,
-                           jornadas=jornadas, areas=areas)
+
 
 
 @app.route('/listado')
@@ -253,6 +278,7 @@ def logout():
 
 app.register_blueprint(jornada_bp)  # registrar las rutas
 app.register_blueprint(puesto_bp)  # registrar las rutas
+app.register_blueprint(area_bp)  # registrar las rutas
 
 if __name__ == '__main__':
     app.run(debug=True)
