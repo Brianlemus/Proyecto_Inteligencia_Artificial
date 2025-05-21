@@ -2,14 +2,17 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from datetime import datetime
 import csv
 import os
+from pathlib import Path
 
 app = Flask(__name__, template_folder='../templates')
 app.secret_key = 'tu_clave_secreta_aqui'  # Necesario para mensajes flash
+CSV_FILE = Path('ticket.csv')
+DICCIONARIO_FILE = Path('diccionario.csv')
 
 def cargar_diccionario():
     diccionario = {}
     try:
-        with open('diccionario.csv', mode='r', encoding='utf-8') as archivo:
+        with DICCIONARIO_FILE.open(mode='r', encoding='utf-8', errors='replace') as archivo:
             lector = csv.DictReader(archivo)
             for fila in lector:
                 area = fila['Area']
@@ -21,16 +24,14 @@ def cargar_diccionario():
                 diccionario[problema]['soluciones'].append(solucion)
     except FileNotFoundError:
         flash("El archivo diccionario.csv no existe", "error")
-    except UnicodeDecodeError as e:
-        flash(f"Error de codificación: {str(e)}", "error")
     return diccionario
 
 diccionario = cargar_diccionario()
 
 def obtener_numero_ticket():
-    if not os.path.exists('ticket.csv'):
+    if not CSV_FILE.exists():
         return 1
-    with open('ticket.csv', mode='r', encoding='utf-8') as file:
+    with CSV_FILE.open(mode='r', encoding='utf-8', errors='replace') as file:
         reader = csv.reader(file)
         tickets = list(reader)
         return len(tickets) + 1
@@ -55,12 +56,11 @@ def home():
             resultado += f"<li>{solucion}</li>"
         resultado += "</ul>"
 
-        # Generar ticket provisional
         numero_ticket = obtener_numero_ticket()
         fecha = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         estado = "Espera"
 
-        with open('ticket.csv', mode='a', newline='', encoding='utf-8') as csvfile:
+        with CSV_FILE.open(mode='a', newline='', encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow([numero_ticket, fecha, prioridad, area, descripcion, estado])  
 
@@ -79,18 +79,16 @@ def seguimiento_ticket():
         leido = request.form.get('leido')
         resuelto = request.form.get('resuelto')
 
-        # Leer todos los tickets
         tickets = []
-        if os.path.exists('ticket.csv'):
-            with open('ticket.csv', mode='r', encoding='utf-8') as file:
+        if CSV_FILE.exists():
+            with CSV_FILE.open(mode='r', encoding='utf-8', errors='replace') as file:
                 reader = csv.reader(file)
                 tickets = list(reader)
 
-        # Si ambas respuestas son "Sí", eliminar el último ticket en espera
         if leido == "si" and resuelto == "si":
-            if tickets and tickets[-1][5] == "Espera":  # Verificar que el último está en espera
+            if tickets and tickets[-1][5] == "Espera":
                 tickets.pop()
-                with open('ticket.csv', mode='w', newline='', encoding='utf-8') as file:
+                with CSV_FILE.open(mode='w', newline='', encoding='utf-8') as file:
                     writer = csv.writer(file)
                     writer.writerows(tickets)
                 flash("No se generó ticket ya que el problema fue resuelto", "success")
@@ -99,15 +97,13 @@ def seguimiento_ticket():
                 flash("No hay tickets pendientes para cancelar", "info")
                 return redirect(url_for('barra'))
 
-        # Si no se resolvió, mantener el ticket generado previamente
         elif resuelto in ["no", "no_completamente"]:
             flash("Ticket generado correctamente", "success")
             return redirect(url_for('seguimiento_ticket'))
 
-    # Mostrar tickets existentes
     tickets = []
     try:
-        with open('ticket.csv', mode='r', encoding='utf-8') as file:
+        with CSV_FILE.open(mode='r', encoding='utf-8', errors='replace') as file:
             reader = csv.reader(file)
             tickets = list(reader)
     except FileNotFoundError:
@@ -115,18 +111,54 @@ def seguimiento_ticket():
 
     return render_template('seguimiento.html', ticket=tickets)
 
+
+@app.route('/editar_ticket', methods=['GET'])
+def index():
+    ticket = read_tickets()
+    return render_template('editar_ticket.html', ticket=ticket)
+
+def read_tickets():
+    if not CSV_FILE.exists():
+        return []
+    
+    with CSV_FILE.open(newline='', encoding='utf-8', errors='replace') as csvfile:
+        return list(csv.reader(csvfile))
+
+@app.route('/edit/<int:ticket_id>', methods=['POST'])
+def edit_ticket(ticket_id):
+    ticket = read_tickets()
+    
+    if ticket_id < 0 or ticket_id >= len(ticket):
+        return redirect(url_for('index'))
+    
+    updated_ticket = [
+        request.form.get('ticket_number', ticket[ticket_id][0]),
+        request.form['fecha'],
+        request.form['prioridad'],
+        request.form['area'],
+        request.form['problema'],
+        request.form['estado']
+    ]
+    
+    ticket[ticket_id] = updated_ticket
+    
+    with CSV_FILE.open('w', newline='', encoding='utf-8') as csvfile:
+        csv.writer(csvfile).writerows(ticket)
+    
+    return redirect(url_for('index'))
+
 @app.route('/barra')
 def barra():
     return render_template('menuAdmin.html')
 
 if __name__ == '__main__':
-    if not os.path.exists('ticket.csv'):
-        with open('ticket.csv', mode='w', newline='', encoding='utf-8') as file:
+    if not CSV_FILE.exists():
+        with CSV_FILE.open(mode='w', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
             writer.writerow(["Número", "Fecha", "Prioridad", "Área", "Problema", "Estado"])
     
-    if not os.path.exists('diccionario.csv'):
-        with open('diccionario.csv', mode='w', newline='', encoding='utf-8') as file:
+    if not DICCIONARIO_FILE.exists():
+        with DICCIONARIO_FILE.open(mode='w', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
             writer.writerow(["Area", "Problema", "Solucion", "Prioridad"])
     
