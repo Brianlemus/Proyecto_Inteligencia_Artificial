@@ -1,9 +1,9 @@
 from flask import Flask, render_template, redirect, url_for, request, flash
 from datetime import datetime
-import pandas as pd
-import matplotlib.pyplot as plt
-from io import BytesIO
-import base64
+import pandas as pd # Instalación nueva
+import matplotlib.pyplot as plt # Instalación nueva
+from io import BytesIO # Instalación nueva
+import base64 # Instalación nueva
 import csv
 import os
 from pathlib import Path
