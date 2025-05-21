@@ -4,6 +4,7 @@ import os
 from rutas.jornada import jornada_bp  # importar el blueprint
 from rutas.puesto import puesto_bp  # importar el blueprint
 from rutas.area import area_bp 
+from rutas.general_hf import ticket_bp
 from utils.csv_utils import leer_direcciones,leer_tipos_puesto,leer_jornadas,leer_areas,guardar_csv,leer_trabajadores, leer_residentes, leer_usuarios,read_csv
 
 app = Flask(__name__)

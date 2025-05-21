@@ -8,8 +8,9 @@ import csv
 import os
 from pathlib import Path
 
-app = Flask(__name__, template_folder='../templates')
-app.secret_key = 'tu_clave_secreta_aqui'  # Necesario para mensajes flash
+ticket_bp = Blueprint('ticket', __name__, template_folder='templates', url_prefix='/ticket')
+
+#ticket_bp.secret_key = 'tu_clave_secreta_aqui'  # Necesario para mensajes flash
 CSV_FILE = Path('ticket.csv')
 DICCIONARIO_FILE = Path('diccionario.csv')
 
@@ -128,15 +129,11 @@ def generar_grafica_barras_prioridad():
     
     return imagen
 
-@app.route('/')
-def index():
-    return render_template('menuAdmin.html')
-
-@app.route('/barra')
+@ticket_bp.route('/barra')
 def barra():
     return render_template('menuAdmin.html')
 
-@app.route('/crear_ticket', methods=['GET', 'POST'])
+@ticket_bp.route('/crear_ticket', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
         descripcion = request.form['descripcion']
@@ -168,12 +165,12 @@ def home():
 
     return render_template('crearticket.html')
 
-@app.route('/mostrar_respuesta')
+@ticket_bp.route('/mostrar_respuesta')
 def mostrar_respuesta():
     resultado = request.args.get('resultado', '')
     return render_template('solucion.html', resultado=resultado)
 
-@app.route('/seguimiento_ticket', methods=['GET', 'POST'])
+@ticket_bp.route('/seguimiento_ticket', methods=['GET', 'POST'])
 def seguimiento_ticket():
     if request.method == 'POST':
         leido = request.form.get('leido')
@@ -211,7 +208,7 @@ def seguimiento_ticket():
 
     return render_template('seguimiento.html', ticket=tickets)
 
-@app.route('/editar_ticket', methods=['GET'])
+@ticket_bp.route('/editar_ticket', methods=['GET'])
 def editar_ticket():
     ticket = read_tickets()
     return render_template('editar_ticket.html', ticket=ticket)
@@ -223,7 +220,7 @@ def read_tickets():
     with CSV_FILE.open(newline='', encoding='utf-8', errors='replace') as csvfile:
         return list(csv.reader(csvfile))
 
-@app.route('/edit/<int:ticket_id>', methods=['POST'])
+@ticket_bp.route('/edit/<int:ticket_id>', methods=['POST'])
 def edit_ticket(ticket_id):
     ticket = read_tickets()
     
@@ -246,7 +243,7 @@ def edit_ticket(ticket_id):
     
     return redirect(url_for('editar_ticket'))
 
-@app.route('/grafica_pie_area')
+@ticket_bp.route('/grafica_pie_area')
 def mostrar_grafica_pie_area():
     imagen = generar_grafica_pie_area()
     if imagen:
@@ -254,7 +251,7 @@ def mostrar_grafica_pie_area():
     else:
         return "No se pudo leer el archivo CSV o no hay datos para mostrar."
 
-@app.route('/grafica_pie_prioridad')
+@ticket_bp.route('/grafica_pie_prioridad')
 def mostrar_grafica_pie_prioridad():
     imagen = generar_grafica_pie_prioridad()
     if imagen:
@@ -262,7 +259,7 @@ def mostrar_grafica_pie_prioridad():
     else:
         return "No se pudo leer el archivo CSV o no hay datos para mostrar."
 
-@app.route('/grafica_barras_area')
+@ticket_bp.route('/grafica_barras_area')
 def mostrar_grafica_barras_area():
     imagen = generar_grafica_barras_area()
     if imagen:
@@ -270,7 +267,7 @@ def mostrar_grafica_barras_area():
     else:
         return "No se pudo leer el archivo CSV o no hay datos para mostrar."
 
-@app.route('/grafica_barras_prioridad')
+@ticket_bp.route('/grafica_barras_prioridad')
 def mostrar_grafica_barras_prioridad():
     imagen = generar_grafica_barras_prioridad()
     if imagen:
@@ -278,15 +275,3 @@ def mostrar_grafica_barras_prioridad():
     else:
         return "No se pudo leer el archivo CSV o no hay datos para mostrar."
 
-if __name__ == '__main__':
-    if not CSV_FILE.exists():
-        with CSV_FILE.open(mode='w', newline='', encoding='utf-8') as file:
-            writer = csv.writer(file)
-            writer.writerow(["Número", "Fecha", "Prioridad", "Área", "Problema", "Estado"])
-    
-    if not DICCIONARIO_FILE.exists():
-        with DICCIONARIO_FILE.open(mode='w', newline='', encoding='utf-8') as file:
-            writer = csv.writer(file)
-            writer.writerow(["Area", "Problema", "Solucion", "Prioridad"])
-    
-    app.run(debug=True)
