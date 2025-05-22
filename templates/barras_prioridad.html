@@ -1,21 +1,34 @@
 <!DOCTYPE html>
-
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Prioridad</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-    </head>
-    
-    <body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prioridad</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .grafica-img {
+            display: block;
+            margin: 0 auto;
+            max-width: 700px;
+            width: 100%;
+            height: auto;
+            box-shadow: 0 0 20px #d3e0e9;
+            border-radius: 1rem;
+            background: #fff;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container py-5">
         <div class="mb-3">
             <a href="/menuAdmin" class="btn btn-outline-secondary">← Regresar al Menú</a>
         </div>
-         <h3>Grafica por Prioridad</h3>
-
-            <img src="data:image/png;base64,{{ imagen }}" alt="Gráfico de Barras por Prioridad">
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
-    </body>
+        <h3 class="text-center mb-4">Gráfica de Barras por Prioridad</h3>
+        <div class="d-flex justify-content-center">
+            <img src="data:image/png;base64,{{ imagen }}" alt="Gráfico de Barras por Prioridad" class="grafica-img">
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
