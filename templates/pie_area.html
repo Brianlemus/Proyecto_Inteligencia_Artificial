@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfica por Área</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .grafica-img {
+            display: block;
+            margin: 0 auto;
+            max-width: 650px; /* Más grande */
+            width: 100%;
+            height: auto;
+            box-shadow: 0 0 20px #d3e0e9;
+            border-radius: 1rem;
+            background: #fff;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="mb-3">
+            <a href="/menuAdmin" class="btn btn-outline-secondary">← Regresar al Menú</a>
+        </div>
+        <h3 class="text-center mb-4">Gráfica por Área</h3>
+        <div class="d-flex justify-content-center">
+            <img src="data:image/png;base64,{{ imagen }}" alt="Gráfico de Pie por Área" class="grafica-img">
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

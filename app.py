@@ -4,6 +4,7 @@ import os
 from rutas.jornada import jornada_bp  # importar el blueprint
 from rutas.puesto import puesto_bp  # importar el blueprint
 from rutas.area import area_bp 
+from rutas.general_hf import ticket_bp
 from utils.csv_utils import leer_direcciones,leer_tipos_puesto,leer_jornadas,leer_areas,guardar_csv,leer_trabajadores, leer_residentes, leer_usuarios,read_csv
 
 app = Flask(__name__)
@@ -151,6 +152,11 @@ def ver_datos():
                            residentes=residentes,
                            usuarios=usuarios)
 
+@app.route('/listadoU')
+def ver_datosU():    
+    usuarios = leer_usuarios()
+    return render_template('listado_u.html',usuarios=usuarios)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -279,6 +285,7 @@ def logout():
 app.register_blueprint(jornada_bp)  # registrar las rutas
 app.register_blueprint(puesto_bp)  # registrar las rutas
 app.register_blueprint(area_bp)  # registrar las rutas
+app.register_blueprint(ticket_bp)  # registrar las rutas
 
 if __name__ == '__main__':
     app.run(debug=True)
