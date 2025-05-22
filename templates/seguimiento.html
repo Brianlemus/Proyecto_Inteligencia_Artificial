@@ -9,6 +9,9 @@
 <body class="bg-light">
 
   <div class="container mt-5">
+<div class="mb-3">
+    <a href="/menuAdmin" class="btn btn-outline-secondary">← Regresar al Menú</a>
+</div>
 
     <!-- Título -->
     <h2 class="text-center mb-4">LISTADO DE TICKETS PERSONALES</h2>
@@ -25,15 +28,21 @@
             <th>Estado</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-        </tbody>
+      <tbody>
+  {% for t in tickets %}
+    <tr>
+      <td>{{ t[0] }}</td> <!-- Numero Ticket -->
+      <td>{{ t[1] }}</td> <!-- Fecha - Hora -->
+      <td>{{ t[3] }}</td> <!-- Problema (ejemplo) -->
+      <td>{{ t[4] }}</td> <!-- Descripción -->
+      <td>{{ t[5] }}</td> <!-- Estado -->
+    </tr>
+  {% else %}
+    <tr><td colspan="5">No hay tickets para mostrar.</td></tr>
+  {% endfor %}
+</tbody>
+
+
       </table>
     </div>
 
