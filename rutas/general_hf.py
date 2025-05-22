@@ -1,7 +1,10 @@
 from flask import Flask, render_template, redirect, url_for, request, flash,Blueprint
 from datetime import datetime
 import pandas as pd # Instalación nueva
-import matplotlib.pyplot as plt # Instalación nueva
+# import matplotlib.pyplot as plt # Instalación nueva
+import matplotlib
+matplotlib.use('Agg')  # Usa el backend que no abre ventanas
+import matplotlib.pyplot as plt
 from io import BytesIO # Instalación nueva
 import base64 # Instalación nueva
 import csv
