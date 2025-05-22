@@ -17,9 +17,6 @@
     <li class="nav-item" role="presentation">
       <button class="nav-link" id="residentes-tab" data-bs-toggle="tab" data-bs-target="#residentes" type="button" role="tab">Residentes</button>
     </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="usuarios-tab" data-bs-toggle="tab" data-bs-target="#usuarios" type="button" role="tab">Usuarios</button>
-    </li>
   </ul>
 
   <!-- Tab Content -->
@@ -58,28 +55,6 @@
         </thead>
         <tbody>
           {% for fila in residentes %}
-            <tr>
-              {% for valor in fila.values() %}
-                <td>{{ valor }}</td>
-              {% endfor %}
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Usuarios -->
-    <div class="tab-pane fade" id="usuarios" role="tabpanel">
-      <table class="table table-bordered table-striped">
-        <thead>
-          <tr>
-            {% for col in usuarios[0].keys() %}
-              <th>{{ col }}</th>
-            {% endfor %}
-          </tr>
-        </thead>
-        <tbody>
-          {% for fila in usuarios %}
             <tr>
               {% for valor in fila.values() %}
                 <td>{{ valor }}</td>

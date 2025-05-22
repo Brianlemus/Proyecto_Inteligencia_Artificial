@@ -152,6 +152,11 @@ def ver_datos():
                            residentes=residentes,
                            usuarios=usuarios)
 
+@app.route('/listadoU')
+def ver_datosU():    
+    usuarios = leer_usuarios()
+    return render_template('listado_u.html',usuarios=usuarios)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
