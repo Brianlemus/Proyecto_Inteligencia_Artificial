@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request, flash
+from flask import Flask, render_template, redirect, url_for, request, flash,Blueprint
 from datetime import datetime
 import pandas as pd # Instalación nueva
 import matplotlib.pyplot as plt # Instalación nueva
@@ -161,7 +161,7 @@ def home():
             writer = csv.writer(csvfile)
             writer.writerow([numero_ticket, fecha, prioridad, area, descripcion, estado])  
 
-        return redirect(url_for('mostrar_respuesta', resultado=resultado))
+        return redirect(url_for('ticket.mostrar_respuesta', resultado=resultado))
 
     return render_template('crearticket.html')
 
@@ -189,14 +189,14 @@ def seguimiento_ticket():
                     writer = csv.writer(file)
                     writer.writerows(tickets)
                 flash("No se generó ticket ya que el problema fue resuelto", "success")
-                return redirect(url_for('index'))
+                return redirect(url_for('ticket.index'))
             else:
                 flash("No hay tickets pendientes para cancelar", "info")
-                return redirect(url_for('index'))
+                return redirect(url_for('ticket.index'))
 
         elif resuelto in ["no", "no_completamente"]:
             flash("Ticket generado correctamente", "success")
-            return redirect(url_for('seguimiento_ticket'))
+            return redirect(url_for('ticket.seguimiento_ticket'))
 
     tickets = []
     try:
@@ -206,7 +206,7 @@ def seguimiento_ticket():
     except FileNotFoundError:
         flash("No hay tickets generados aún", "info")
 
-    return render_template('seguimiento.html', ticket=tickets)
+    return render_template('seguimiento.html', tickets=tickets)
 
 @ticket_bp.route('/editar_ticket', methods=['GET'])
 def editar_ticket():
@@ -225,7 +225,7 @@ def edit_ticket(ticket_id):
     ticket = read_tickets()
     
     if ticket_id < 0 or ticket_id >= len(ticket):
-        return redirect(url_for('editar_ticket'))
+        return redirect(url_for('ticket.editar_ticket'))
     
     updated_ticket = [
         request.form.get('ticket_number', ticket[ticket_id][0]),
@@ -241,7 +241,7 @@ def edit_ticket(ticket_id):
     with CSV_FILE.open('w', newline='', encoding='utf-8') as csvfile:
         csv.writer(csvfile).writerows(ticket)
     
-    return redirect(url_for('editar_ticket'))
+    return redirect(url_for('ticket.editar_ticket'))
 
 @ticket_bp.route('/grafica_pie_area')
 def mostrar_grafica_pie_area():

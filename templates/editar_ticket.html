@@ -9,6 +9,9 @@
 
 <body class="bg-light">
     <div class="container mt-5">
+        <div class="mb-3">
+    <a href="/menuAdmin" class="btn btn-outline-secondary">← Regresar al Menú</a>
+</div>
         <h2 class="text-center mb-4">Editable de tickets</h2>
         <div class="table-responsive">
             <table class="table table-bordered table-hover text-center align-middle">
@@ -50,7 +53,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form method="POST" action="{{ url_for('edit_ticket', ticket_id=loop.index0) }}">
+                                    <form method="POST" action="{{ url_for('ticket.edit_ticket', ticket_id=loop.index0) }}">
                                         <input type="hidden" name="ticket_number" value="{{ t[0] }}">
                                         
                                         <div class="mb-3">

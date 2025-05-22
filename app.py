@@ -280,6 +280,7 @@ def logout():
 app.register_blueprint(jornada_bp)  # registrar las rutas
 app.register_blueprint(puesto_bp)  # registrar las rutas
 app.register_blueprint(area_bp)  # registrar las rutas
+app.register_blueprint(ticket_bp)  # registrar las rutas
 
 if __name__ == '__main__':
     app.run(debug=True)
