@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formularios con Selección</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">        
+        <div class="mb-3">
+            <a href="/menuAdmin" class="btn btn-outline-secondary">← Regresar al Menú</a>
+        </div>
+    
+        {% if mensaje %}
+        <div class="alert alert-success" role="alert">
+            {{ mensaje }}
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <h2>Selecciona un formulario</h2>
+
+        <!-- Selector -->
+        <div class="mb-3">
+            <label for="formSelector" class="form-label">Formulario:</label>
+            <select class="form-select" id="formSelector">
+                <option value="" selected disabled>Selecciona una opción</option>
+                <option value="form1">Residente</option>
+                <option value="form2">Trabajador</option>
+            </select>
+        </div>
+
+        <!-- Formulario 1: Asignación de Dirección -->
+        <form id="form1" action="/guardar_residente" method="POST" class="d-none">
+            <h4>Datos Personales</h4>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>DPI</label>
+                    <input type="text" class="form-control" name="dpi" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>NIT</label>
+                    <input type="text" class="form-control" name="nit" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Nombre Completo</label>
+                    <input type="text" class="form-control" name="nombre_completo" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Apellidos</label>
+                    <input type="text" class="form-control" name="apellidos" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Teléfono</label>
+                    <input type="tel" class="form-control" name="telefono" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Fecha de Nacimiento</label>
+                    <input type="date" class="form-control" name="fecha_nacimiento" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Correo Electrónico</label>
+                    <input type="email" class="form-control" name="correo" required>
+                </div>
+            </div>
+
+            <h4>Asignación de Dirección</h4>
+            <div class="mb-3">
+                <label>Dirección</label>
+                <select class="form-select" name="direccion_id" required>
+                    <option value="" disabled selected>Seleccione una dirección</option>
+                    {% for d in direcciones %}
+                    <option value="{{ d.id }}">{{ d.texto }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar Dirección</button>
+        </form>
+
+        <!-- Formulario 2: Asignación de Puesto -->
+        <form id="form2" action="/guardar_trabajador" method="POST" class="d-none">
+            <h4>Datos Personales</h4>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>DPI</label>
+                    <input type="text" class="form-control" name="dpi" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>NIT</label>
+                    <input type="text" class="form-control" name="nit" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Nombre Completo</label>
+                    <input type="text" class="form-control" name="nombre_completo" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Apellidos</label>
+                    <input type="text" class="form-control" name="apellidos" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Teléfono</label>
+                    <input type="tel" class="form-control" name="telefono" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Fecha de Nacimiento</label>
+                    <input type="date" class="form-control" name="fecha_nacimiento" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Correo Electrónico</label>
+                    <input type="email" class="form-control" name="correo" required>
+                </div>
+            </div>            
+
+            <h4>Asignación de Puesto</h4>
+            <div class="mb-3">
+                <label>Salario</label>
+                <input type="number" step="0.01" class="form-control" name="salario" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Tipo de Puesto</label>
+                <select class="form-select" name="tipo_puesto" required>
+                    <option value="" disabled selected>Seleccione una puesto</option>
+                    {% for tipo in tipos_puesto %}
+                    <option value="{{ tipo.id }}">{{ tipo.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label>Tipo de Jornada</label>
+                <select class="form-select" name="tipo_jornada" required>
+                    <option value="" disabled selected>Seleccione una jornada</option>
+                    {% for j in jornadas %}
+                    <option value="{{ j.id }}">
+                        {{ j.nombre_jornada }} ({{ j.hora_inicio }} - {{ j.hora_fin }})
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label>Área</label>
+                <select class="form-select" name="area_id" required>
+                    <option value="" disabled selected>Seleccione un área</option>
+                    {% for area in areas %}
+                    <option value="{{ area.id }}">{{ area.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-success">Guardar Puesto</button>
+        </form>
+    </div>
+
+    <script>
+        const selector = document.getElementById("formSelector");
+        const form1 = document.getElementById("form1");
+        const form2 = document.getElementById("form2");
+
+        selector.addEventListener("change", () => {
+            form1.classList.add("d-none");
+            form2.classList.add("d-none");
+
+            if (selector.value === "form1") {
+                form1.classList.remove("d-none");
+            } else if (selector.value === "form2") {
+                form2.classList.remove("d-none");
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

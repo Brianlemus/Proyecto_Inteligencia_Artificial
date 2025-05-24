@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Crear Jornada</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="container mt-5">
+
+        <div class="mb-3">
+            <a href="/menuAdmin" class="btn btn-outline-secondary">← Regresar al Menú</a>
+        </div>
+
+        <h3 class="text-center mb-4">Registrar Nueva Jornada</h3>
+
+        <!-- Mensajes flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('jornada.crear_jornada') }}" method="POST" class="border rounded p-4 bg-light shadow-sm">
+            <div class="mb-3">
+                <label for="jornada" class="form-label">Nombre de la Jornada</label>
+                <input type="text" id="jornada" name="jornada" class="form-control" placeholder="Ej: Lunes a Viernes 8am-5pm" required>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Registrar Jornada</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

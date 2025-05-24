@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Tickets Personales</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="mb-3">
+            <a href="/menuAdmin" class="btn btn-outline-secondary">← Regresar al Menú</a>
+        </div>
+        <h2 class="text-center mb-4">Editable de tickets</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover text-center align-middle">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Número Ticket</th>
+                        <th>Fecha - Hora</th>
+                        <th>Prioridad</th>
+                        <th>Área</th>
+                        <th>Problema</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for t in ticket %}
+                    <tr>
+                        <td>{{ t[0] }}</td>
+                        <td>{{ t[1] }}</td>
+                        <td>{{ t[2] }}</td>
+                        <td>{{ t[3] }}</td>
+                        <td>{{ t[4] }}</td>
+                        <td>{{ t[5] }}</td>
+                        <td>
+                            <button class="btn btn-warning" data-bs-toggle="modal" 
+                                    data-bs-target="#editarModal{{ loop.index0 }}">
+                                Editar
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="editarModal{{ loop.index0 }}" tabindex="-1" 
+                         aria-labelledby="editarModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editarModalLabel">Editar Ticket</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="POST" action="{{ url_for('ticket.edit_ticket', ticket_id=loop.index0) }}">
+                                        <input type="hidden" name="ticket_number" value="{{ t[0] }}">
+                                        
+                                        <div class="mb-3">
+                                            <h4>Número ticket: {{ t[0] }}</h4>
+                                        </div>
+
+                                        {% for field, value, label in [
+                                            ('fecha', t[1], 'Fecha - Hora'),
+                                            ('prioridad', t[2], 'Prioridad'),
+                                            ('area', t[3], 'Área'),
+                                            ('problema', t[4], 'Problema'),
+                                            ('estado', t[5], 'Estado')
+                                        ] %}
+                                        <div class="mb-3">
+                                            <label for="{{ field }}" class="form-label">{{ label }}</label>
+                                            <input type="text" class="form-control" id="{{ field }}" 
+                                                   name="{{ field }}" value="{{ value }}" required>
+                                        </div>
+                                        {% endfor %}
+                                        
+                                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
